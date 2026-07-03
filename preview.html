@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('EMAILJS_PUBLIC_KEY');</script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -37,7 +39,6 @@
   .nav-desktop{display:flex;align-items:center;gap:30px}
   .nav-link{font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:#C9A86A;text-decoration:none;opacity:.85}
   .nav-link:hover{opacity:1}
-  .nav-link.active{color:#0F5132!important;border-bottom:2px solid #C9A86A;padding-bottom:4px;opacity:1}
   .cta-gold{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#0F5132;text-decoration:none;background:#C9A86A;padding:12px 22px;border-radius:4px;white-space:nowrap}
   .cta-gold:hover{background:#d8ba80}
   .nav-toggle{position:absolute;opacity:0;pointer-events:none}
@@ -45,28 +46,45 @@
   .mobile-nav{display:none;flex-direction:column;background:#F5F0E8;padding:14px 22px 22px;gap:4px;border-top:1px solid rgba(201,168,106,.25)}
   .mobile-nav a{font-family:'Montserrat',sans-serif;font-weight:600;font-size:16px;color:#C9A86A;text-decoration:none;padding:14px 4px;border-bottom:1px solid rgba(201,168,106,.2)}
   .mobile-nav a.mcta{color:#0F5132;background:#C9A86A;padding:15px;border-radius:4px;text-align:center;margin-top:8px;border:none}
-  .mobile-nav a.active{color:#0F5132!important}
+  .mobile-nav a.nav-active-m{color:#0F5132!important;border-bottom:2px solid #C9A86A}
   .nav-toggle:checked ~ .mobile-nav{display:flex}
+  .nav-link.nav-active{color:#0F5132!important;border-bottom:2px solid #C9A86A;padding-bottom:4px;opacity:1}
+  .nav-link.nav-part{color:#C9A86A!important;opacity:1}
+  .nav-link.nav-pro{color:#C9A86A!important;opacity:1}
 
   /* ---------- Hero ---------- */
-  .hero{background:#0F5132}
-  .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center;min-height:580px}
-  .hero-copy{padding:74px 0}
-  .badge{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(201,168,106,.5);border-radius:40px;padding:7px 16px;margin-bottom:28px}
+  /* ---------- Audience cards hero ---------- */
+  .aud-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:36px auto 30px;max-width:880px}
+  .aud-card{border-radius:12px;padding:22px 24px;text-decoration:none;display:block;border:1.5px solid rgba(15,81,50,.18);background:#fff;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(15,81,50,.07)}
+  .aud-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(15,81,50,.12)}
+  .aud-card.aud-partner{border-color:rgba(201,168,106,.6);background:#fff}
+  .aud-card.aud-pro{border-color:rgba(15,81,50,.35);background:#fff}
+  .aud-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:#0F5132;margin-bottom:8px}
+  .aud-card.aud-partner .aud-title{color:#C9A86A}
+  .aud-card.aud-pro .aud-title{color:#0F5132}
+  .aud-desc{font-size:13px;color:#4A4A4A;line-height:1.45;margin-bottom:14px}
+  .aud-cta-lnk{font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;color:#0F5132;letter-spacing:.3px}
+  .aud-card.aud-partner .aud-cta-lnk{color:#C9A86A}
+  .btn-audit{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15.5px;color:#fff;background:#0F5132;text-decoration:none;padding:17px 38px;border-radius:4px;box-shadow:0 6px 20px rgba(15,81,50,.25)}
+  .btn-audit:hover{background:#0c4228}
+
+  /* ---------- Hero ---------- */
+  .hero{background:#0F5132;padding:72px 40px 80px;text-align:center}
+  .badge{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(201,168,106,.6);border-radius:40px;padding:7px 18px;margin-bottom:30px}
   .badge span.dot{width:7px;height:7px;border-radius:50%;background:#C9A86A}
   .badge span.txt{font-weight:600;font-size:12px;letter-spacing:1.5px;color:#C9A86A;text-transform:uppercase}
-  .h1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:43px;line-height:1.14;color:#fff;letter-spacing:-.5px;text-wrap:balance}
+  .h1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,52px);line-height:1.12;color:#C9A86A;letter-spacing:-.5px;text-wrap:balance;max-width:860px;margin:0 auto}
   .h1 .gold{color:#C9A86A}
-  .hero-tag{font-weight:400;font-size:17px;line-height:1.5;color:#C9A86A;margin-top:22px;max-width:560px}
-  .hero-lead{font-weight:400;font-size:16px;line-height:1.62;color:rgba(245,240,232,.88);margin-top:20px;max-width:580px}
-  .hero-actions{display:flex;align-items:center;gap:26px;margin-top:34px;flex-wrap:wrap}
-  .btn-gold{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15.5px;color:#0F5132;background:#C9A86A;text-decoration:none;padding:17px 32px;border-radius:4px}
+  .hero-lead{font-weight:400;font-size:16px;line-height:1.65;color:rgba(245,240,232,.85);margin-top:16px;max-width:680px;margin-left:auto;margin-right:auto}
+  .hero-actions{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:38px;flex-wrap:wrap}
+  .btn-gold{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15.5px;color:#0F5132;background:#C9A86A;text-decoration:none;padding:17px 36px;border-radius:4px}
   .btn-gold:hover{background:#d8ba80}
-  .link-under{font-weight:600;font-size:16px;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:3px}
-  .hero-media{padding:48px 0}
-  .hero-media .ph{position:relative;border-radius:6px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.28);aspect-ratio:4/3.5;background:repeating-linear-gradient(135deg,#135e3b,#135e3b 14px,#114f33 14px,#114f33 28px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
-  .hero-media .cap{font-family:monospace;font-size:12px;letter-spacing:1px;color:rgba(245,240,232,.7)}
-  .hero-media .cap2{font-family:monospace;font-size:10px;letter-spacing:1px;color:rgba(245,240,232,.45)}
+  .link-under{font-weight:600;font-size:16px;color:#F5F0E8;text-decoration:none;border-bottom:1px solid rgba(245,240,232,.4);padding-bottom:3px}
+  .hero-kpis{display:flex;justify-content:center;gap:0;margin-top:60px;border-top:1px solid rgba(201,168,106,.4);padding-top:48px;flex-wrap:wrap}
+  .hero-kpi{text-align:center;padding:0 44px;border-right:1px solid rgba(201,168,106,.3)}
+  .hero-kpi:last-child{border-right:none}
+  .hero-kpi .kn{font-family:'Montserrat',sans-serif;font-weight:800;font-size:40px;color:#C9A86A;line-height:1}
+  .hero-kpi .kl{font-weight:400;font-size:13px;color:rgba(245,240,232,.75);margin-top:8px;line-height:1.4}
 
   /* ---------- Chiffres ---------- */
   .chiffres-sec{background:#F5F0E8;border-top:1px solid #C9A86A;border-bottom:1px solid #C9A86A}
@@ -77,7 +95,9 @@
   .stat .lbl{font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;color:#0F5132;margin-top:12px;letter-spacing:.3px;line-height:1.4}
 
   /* ---------- Services ---------- */
-  .services{background:#F5F0E8;padding:88px 0}
+  .services{background:#0F5132;padding:88px 0}
+  .services .h2{color:#fff}
+  .services .eyebrow{color:#C9A86A}
   .sec-head{max-width:760px;margin-bottom:48px}
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .card{background:#fff;border-radius:6px;padding:32px 28px;box-shadow:0 4px 18px rgba(15,81,50,.07);border:1px solid rgba(15,81,50,.05);display:flex;flex-direction:column;gap:16px}
@@ -177,6 +197,44 @@
   .footer-bottom .row{border-top:1px solid rgba(201,168,106,.3);padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .footer-bottom span{font-weight:300;font-size:12px;color:#8A8A8A}
 
+  /* ---------- Mini-simulateur accueil ---------- */
+  .minisim{background:#0F5132;padding:88px 0}
+  .minisim .sec-head .h2{color:#fff}
+  .minisim .eyebrow{color:#C9A86A}
+  .mscard{background:#fff;border-radius:12px;box-shadow:0 16px 50px rgba(0,0,0,.18);padding:40px 44px;max-width:780px;margin:40px auto 0}
+  .ms-steps{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .ms-field label{display:block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#0F5132;margin-bottom:10px;letter-spacing:.3px}
+  .ms-sel{width:100%;padding:13px 14px;border:2px solid rgba(15,81,50,.18);border-radius:8px;font-size:15px;color:#4A4A4A;background:#F5F0E8;cursor:pointer}
+  .ms-sel:focus{outline:none;border-color:#0F5132}
+  .ms-profils{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ms-profil{border:2px solid #e0dbd0;border-radius:8px;padding:10px 12px;cursor:pointer;background:#F5F0E8;text-align:left}
+  .ms-profil:hover{border-color:#0F5132}
+  .ms-profil.active{border-color:#0F5132;background:rgba(15,81,50,.07)}
+  .ms-profil .pt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#0F5132;display:flex;align-items:center;gap:6px;margin-bottom:2px}
+  .ms-profil .ps{font-size:12px;color:#8A8A8A}
+  .ms-profil .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .ms-btn{width:100%;background:#C9A86A;color:#0F5132;font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px;border:none;border-radius:8px;padding:17px;cursor:pointer;margin-top:28px}
+  .ms-btn:hover{background:#b8944f}
+  .ms-result{display:none;margin-top:28px;border-top:2px solid #C9A86A;padding-top:28px}
+  .ms-result.show{display:block}
+  .ms-totals{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px}
+  .ms-tot{text-align:center;background:#F5F0E8;border-radius:8px;padding:16px 12px}
+  .ms-tot .tn{font-family:'Montserrat',sans-serif;font-weight:800;font-size:24px;color:#C9A86A;line-height:1}
+  .ms-tot .tl{font-size:12px;color:#0F5132;font-weight:600;margin-top:6px;line-height:1.3}
+  .ms-rac{background:#0F5132;border-radius:8px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+  .ms-rac .rl{font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:rgba(245,240,232,.9)}
+  .ms-rac .rv{font-family:'Montserrat',sans-serif;font-weight:800;font-size:30px;color:#C9A86A}
+  .ms-lead{background:#F5F0E8;border-radius:10px;padding:24px 26px}
+  .ms-lead p{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:#0F5132;margin-bottom:16px}
+  .ms-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  .ms-inp{width:100%;padding:12px 14px;border:2px solid rgba(15,81,50,.18);border-radius:8px;font-size:15px;color:#4A4A4A;background:#fff}
+  .ms-inp:focus{outline:none;border-color:#0F5132}
+  .ms-send{width:100%;background:#0F5132;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:8px;padding:14px;cursor:pointer}
+  .ms-send:hover{background:#0c4228}
+  .ms-note{font-size:12px;color:#8A8A8A;margin-top:8px;text-align:center}
+  .ms-confirm{display:none;background:#1a7a4a;color:#fff;border-radius:8px;padding:18px 22px;text-align:center;margin-top:14px;font-weight:600}
+  .ms-confirm.show{display:block}
+
   /* ================= RESPONSIVE ================= */
   /* horizontal nav needs ~1035px; below that use the hamburger */
   @media (max-width:1040px){
@@ -186,33 +244,37 @@
   @media (max-width:980px){
     .grid-3{grid-template-columns:repeat(2,1fr)}
     .steps{grid-template-columns:repeat(2,1fr);row-gap:36px}
-    .chiffres{grid-template-columns:repeat(2,1fr);row-gap:40px}
-    .stat{border-right:none}
     .grid-2{grid-template-columns:1fr;gap:40px}
     .footer-grid{grid-template-columns:1fr 1fr;row-gap:40px}
-    .hero-grid{grid-template-columns:1fr;gap:0}
-    .hero-media{display:none}
+    .hero-kpi{padding:0 28px}
   }
   @media (max-width:767px){
-    /* single column everywhere */
-    .grid-3,.steps,.chiffres,.grid-2,.footer-grid{grid-template-columns:1fr}
-    /* full-width buttons */
-    .btn-gold,.btn-green,.cta-gold,.link-under,.contact-tel{width:100%;text-align:center}
-    .hero-actions{align-items:stretch}
-    .contact-actions{align-self:stretch;align-items:stretch}
-    .contact-actions{width:100%}
-    /* tighter padding, no horizontal overflow */
-    .wrap,.header-inner,.chiffres,.faq-inner,.footer-grid,.footer-bottom{padding-left:22px;padding-right:22px}
-    .chiffres{padding-top:36px;padding-bottom:36px}
-    /* readable type >= 16px */
-    .h1{font-size:32px}
+    .grid-3,.steps,.grid-2,.footer-grid{grid-template-columns:1fr}
+    .btn-gold,.btn-green,.cta-gold,.contact-tel{width:100%;text-align:center;display:block}
+    .link-under{width:100%;text-align:center;border-bottom:none;padding-bottom:0}
+    .hero-actions{align-items:stretch;flex-direction:column;max-width:360px;margin-left:auto;margin-right:auto}
+    .contact-actions{align-self:stretch;align-items:stretch;width:100%}
+    .wrap,.header-inner,.faq-inner,.footer-grid,.footer-bottom{padding-left:22px;padding-right:22px}
+    .hero{padding:60px 22px 70px}
+    .hero-kpis{gap:22px;padding-top:36px;margin-top:44px}
+    .hero-kpi{border-right:none;padding:0 10px}
+    .hero-kpi .kn{font-size:32px}
     .h2,.contact h2{font-size:27px}
-    .hero-copy{padding:56px 0}
     .services,.process,.aides{padding:64px 0}
-    .link-under{border-bottom:none;padding-bottom:0}
+    .aud-nav{grid-template-columns:1fr}
+    .ms-steps{grid-template-columns:1fr}
+    .ms-totals{grid-template-columns:1fr 1fr}
+    .ms-totals .ms-tot:last-child{grid-column:1/-1}
+    .ms-inputs{grid-template-columns:1fr}
+    .ms-inputs input[style*="grid-column"]{grid-column:1}
+    .mscard{padding:26px 22px}
+    .ms-rac{flex-direction:column;text-align:center;gap:8px}
   }
-  @media (max-width:400px){
-    .stat .num{font-size:38px}
+  @media (max-width:540px){
+    .hero-kpis{grid-template-columns:1fr 1fr;display:grid;gap:18px 0}
+    .hero-kpi{border-right:none;border-bottom:1px solid rgba(201,168,106,.2);padding-bottom:18px}
+    .hero-kpi:nth-child(odd){border-right:1px solid rgba(201,168,106,.2)}
+    .hero-kpi:nth-child(3),.hero-kpi:nth-child(4){border-bottom:none}
   }
 </style>
 </head>
@@ -222,7 +284,7 @@
   <header class="site-header">
     <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
     <div class="header-inner">
-      <a class="brand" href="index.html">
+      <a class="brand" href="#hero">
         <img src="assets/logo-beige.png" alt="Logo Eco Trans'Énergie" width="50" height="50">
         <span class="brand-name">
           <span class="n1">ECO&nbsp;TRANS'ÉNERGIE</span>
@@ -230,55 +292,56 @@
         </span>
       </a>
       <nav class="nav-desktop">
-        <a class="nav-link active" href="index.html">Accueil</a>
-        <a class="nav-link" href="simulateur.html#partenaire">Partenaires</a>
-        <a class="nav-link" href="professionnels.html">Professionnels &amp; Tertiaire</a>
+        <a class="nav-link nav-active" href="index.html">Accueil</a>
+        <a class="nav-link nav-part" href="simulateur.html#partenaire">Partenaires</a>
+        <a class="nav-link nav-pro" href="professionnels.html">Pro & Tertiaire</a>
         <a class="nav-link" href="simulateur.html">Simulateur</a>
-        <a class="cta-gold" href="mailto:ecotransenergie@gmail.com?subject=Demande%20d'audit%20gratuit">Audit gratuit</a>
+        <a class="cta-gold" href="mailto:ecotransenergie@gmail.com?subject=Audit%20gratuit%20-%20Eco%20Trans%27%C3%89nergie">Audit gratuit</a>
       </nav>
       <label class="burger" for="nav-toggle" aria-label="Ouvrir le menu">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F5132" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
       </label>
     </div>
     <nav class="mobile-nav">
-      <a class="active" href="index.html">Accueil</a>
-      <a href="simulateur.html#partenaire">Partenaires</a>
-      <a href="professionnels.html">Professionnels &amp; Tertiaire</a>
+      <a class="nav-active" href="index.html">Accueil</a>
+      <a class="nav-part" href="simulateur.html#partenaire">Partenaires</a>
+      <a class="nav-pro" href="professionnels.html">Pro & Tertiaire</a>
       <a href="simulateur.html">Simulateur</a>
-      <a class="mcta" href="mailto:ecotransenergie@gmail.com?subject=Demande%20d'audit%20gratuit">Audit gratuit</a>
+      <a class="mcta" href="mailto:ecotransenergie@gmail.com?subject=Audit%20gratuit%20-%20Eco%20Trans%27%C3%89nergie">Audit gratuit</a>
     </nav>
   </header>
 
   <!-- ============ HERO ============ -->
   <section id="hero" class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <div class="badge"><span class="dot"></span><span class="txt">CEE + Ma Prime Rénov gérés pour vous</span></div>
-        <h1 class="h1">Rénovation énergétique à Meyzieu et Lyon — reste à charge <span class="gold">à partir de 1 000 €</span> avec CEE et Ma Prime Rénov</h1>
-        <p class="hero-tag">Pompes à chaleur · Isolation · Panneaux solaires · Dossiers subventions gérés pour vous</p>
-        <p class="hero-lead">Eco Trans'Énergie accompagne les particuliers de Meyzieu, Lyon et l'Est lyonnais pour leurs travaux de rénovation énergétique. Pompe à chaleur, isolation, ballon thermodynamique, VMC, panneaux solaires : nous gérons le chiffrage, le dossier CEE et Ma Prime Rénov, et la coordination de l'installateur RGE. Votre reste à charge : à partir de 1 000 €.</p>
-        <div class="hero-actions">
-          <a class="btn-gold" href="simulateur.html">Calculer mes aides maintenant</a>
-          <a class="link-under" href="#temoignages">Voir nos réalisations →</a>
-        </div>
-      </div>
-      <div class="hero-media">
-        <div class="ph">
-          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,106,0.8)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
-          <span class="cap">[ photo · maison rénovée à Meyzieu ]</span>
-          <span class="cap2">1200 × 1050px</span>
-        </div>
-      </div>
-    </div>
-  </section>
+    <div class="badge"><span class="dot"></span><span class="txt">CEE + Ma Prime Rénov gérés pour vous</span></div>
+    <h1 class="h1">Combien vous coûte <span class="gold">l'inaction</span> chaque année ?<br>Rénovez à Meyzieu et Lyon — reste à charge <span class="gold">à partir de 1 000 €</span></h1>
+    <p class="hero-lead">Eco Trans'Énergie gère le chiffrage, les dossiers CEE et Ma Prime Rénov, et la coordination de l'installateur RGE. Zéro démarche de votre côté.</p>
 
-  <!-- ============ CHIFFRES CLÉS ============ -->
-  <section class="chiffres-sec">
-    <div class="wrap chiffres" style="max-width:1240px">
-      <div class="stat"><div class="num">1 000 €</div><div class="lbl">Reste à charge moyen après subventions</div></div>
-      <div class="stat"><div class="num">7 000 €</div><div class="lbl">Prime CEE moyenne versée</div></div>
-      <div class="stat"><div class="num">48h</div><div class="lbl">Simulation de votre projet</div></div>
-      <div class="stat"><div class="num">100%</div><div class="lbl">Dossier subvention géré pour vous</div></div>
+    <div class="aud-nav">
+      <a class="aud-card" href="#services">
+        <div class="aud-title">Accueil — Particuliers</div>
+        <div class="aud-desc">PAC · Isolation · Ballon · VMC · Panneaux solaires. Subventions CEE + Ma Prime Rénov gérées pour vous.</div>
+        <div class="aud-cta-lnk">Voir nos solutions →</div>
+      </a>
+      <a class="aud-card aud-partner" href="simulateur.html#partenaire">
+        <div class="aud-title">Partenaires</div>
+        <div class="aud-desc">Agent immobilier, notaire, artisan, courtier — générez jusqu'à 3 000 € de commission par chantier apporté.</div>
+        <div class="aud-cta-lnk">Devenir partenaire →</div>
+      </a>
+      <a class="aud-card aud-pro" href="professionnels.html">
+        <div class="aud-title">Professionnels & Tertiaire</div>
+        <div class="aud-desc">CEE Fiches BAT · Décret Tertiaire · OPERAT. Jusqu'à 30 000 € de prime par bâtiment.</div>
+        <div class="aud-cta-lnk">Voir nos offres →</div>
+      </a>
+    </div>
+
+    <a class="btn-audit" href="mailto:ecotransenergie@gmail.com?subject=Audit%20gratuit%20-%20Eco%20Trans%27%C3%89nergie">Obtenir mon audit gratuit</a>
+
+    <div class="hero-kpis">
+      <div class="hero-kpi"><div class="kn">1 000 €</div><div class="kl">Reste à charge moyen<br>après subventions</div></div>
+      <div class="hero-kpi"><div class="kn">7 000 €</div><div class="kl">Prime CEE<br>moyenne versée</div></div>
+      <div class="hero-kpi"><div class="kn">48h</div><div class="kl">Simulation de<br>votre projet</div></div>
+      <div class="hero-kpi"><div class="kn">100%</div><div class="kl">Dossier subvention<br>géré pour vous</div></div>
     </div>
   </section>
 
@@ -382,6 +445,167 @@
       </div>
     </div>
   </section>
+
+  <!-- ============ MINI-SIMULATEUR ============ -->
+  <section id="simulateur" class="minisim">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Simulateur gratuit</span>
+        <h2 class="h2">Calculez vos aides en 30 secondes</h2>
+      </div>
+      <div class="mscard">
+        <div class="ms-steps">
+          <div class="ms-field">
+            <label>Votre chauffage actuel</label>
+            <select class="ms-sel" id="ms-chauffage">
+              <option value="fioul">Fioul</option>
+              <option value="gaz">Gaz naturel</option>
+              <option value="elec">Électrique (convecteurs)</option>
+              <option value="pac">PAC existante</option>
+            </select>
+          </div>
+          <div class="ms-field">
+            <label>Solution envisagée</label>
+            <select class="ms-sel" id="ms-solution">
+              <option value="pac">Pompe à chaleur air/eau</option>
+              <option value="isolation">Isolation thermique</option>
+              <option value="ballon">Ballon thermodynamique</option>
+              <option value="vmc">VMC double flux</option>
+              <option value="panneaux">Panneaux photovoltaïques</option>
+            </select>
+          </div>
+        </div>
+        <div class="ms-field" style="margin-top:20px">
+          <label>Votre profil de revenus</label>
+          <div class="ms-profils">
+            <button type="button" class="ms-profil active" data-p="TM"><div class="pt"><span class="dot" style="background:#1a6abf"></span>Très modestes</div><div class="ps">&lt; 22 000 €/an</div></button>
+            <button type="button" class="ms-profil" data-p="MO"><div class="pt"><span class="dot" style="background:#e8a900"></span>Modestes</div><div class="ps">22 000 – 30 000 €/an</div></button>
+            <button type="button" class="ms-profil" data-p="IN"><div class="pt"><span class="dot" style="background:#7b2fbe"></span>Intermédiaires</div><div class="ps">30 000 – 43 000 €/an</div></button>
+            <button type="button" class="ms-profil" data-p="SU"><div class="pt"><span class="dot" style="background:#c0392b"></span>Supérieurs</div><div class="ps">&gt; 43 000 €/an</div></button>
+          </div>
+        </div>
+        <button type="button" class="ms-btn" id="ms-calc">Calculer mes aides →</button>
+
+        <div class="ms-result" id="ms-result">
+          <div class="ms-totals">
+            <div class="ms-tot"><div class="tn" id="ms-cee">—</div><div class="tl">Prime CEE estimée</div></div>
+            <div class="ms-tot"><div class="tn" id="ms-mpr">—</div><div class="tl">Ma Prime Rénov estimée</div></div>
+            <div class="ms-tot"><div class="tn" id="ms-cout">—</div><div class="tl">Coût total estimé</div></div>
+          </div>
+          <div class="ms-rac">
+            <span class="rl">Votre reste à charge estimé</span>
+            <span class="rv" id="ms-rac">—</span>
+          </div>
+          <div class="ms-lead">
+            <p>Recevoir votre simulation complète gratuitement</p>
+            <div class="ms-inputs">
+              <input type="text" class="ms-inp" id="ms-prenom" placeholder="Votre prénom">
+              <input type="tel" class="ms-inp" id="ms-tel" placeholder="Votre téléphone">
+              <input type="email" class="ms-inp" id="ms-email" placeholder="Votre email" style="grid-column:1/-1">
+            </div>
+            <button type="button" class="ms-send" id="ms-send">Envoyer ma simulation gratuite →</button>
+            <div class="ms-note">Réponse sous 48h · Aucun engagement · Dossier géré pour vous</div>
+            <div class="ms-confirm" id="ms-confirm">✓ Demande envoyée ! Nous vous contactons sous 48h pour votre simulation détaillée.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function(){
+    var CEE   = {pac:7000,  isolation:3000, ballon:1200, vmc:2500, panneaux:2500};
+    var MPR   = {
+      pac:      {TM:5000,MO:4000,IN:3000,SU:0},
+      isolation:{TM:1750,MO:1400,IN:1050,SU:0},
+      ballon:   {TM:1200,MO:800, IN:400, SU:0},
+      vmc:      {TM:2500,MO:2000,IN:1500,SU:0},
+      panneaux: {TM:0,   MO:0,   IN:0,   SU:0}
+    };
+    var COUT  = {pac:13000, isolation:8000, ballon:4000, vmc:6000, panneaux:7000};
+    var SOL_L = {pac:'Pompe à chaleur air/eau',isolation:'Isolation thermique',ballon:'Ballon thermodynamique',vmc:'VMC double flux',panneaux:'Panneaux photovoltaïques'};
+    var profil = 'TM';
+
+    document.querySelectorAll('.ms-profil').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        document.querySelectorAll('.ms-profil').forEach(function(b){b.classList.remove('active')});
+        btn.classList.add('active');
+        profil = btn.dataset.p;
+      });
+    });
+
+    function fmt(n){return n.toLocaleString('fr-FR')+'&nbsp;€';}
+
+    document.getElementById('ms-calc').addEventListener('click',function(){
+      var sol  = document.getElementById('ms-solution').value;
+      var cee  = CEE[sol];
+      var mpr  = MPR[sol][profil];
+      var cout = COUT[sol];
+      var rac  = Math.max(0, cout - cee - mpr);
+      document.getElementById('ms-cee').innerHTML  = fmt(cee);
+      document.getElementById('ms-mpr').innerHTML  = fmt(mpr);
+      document.getElementById('ms-cout').innerHTML = fmt(cout);
+      document.getElementById('ms-rac').innerHTML  = fmt(rac);
+      var r = document.getElementById('ms-result');
+      r.classList.add('show');
+      r.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+
+    document.getElementById('ms-send').addEventListener('click',function(){
+      var prenom = document.getElementById('ms-prenom').value.trim();
+      var email  = document.getElementById('ms-email').value.trim();
+      var tel    = document.getElementById('ms-tel').value.trim();
+      if(!email){alert('Merci de saisir votre email.');return;}
+      if(!prenom){alert('Merci de saisir votre prénom.');return;}
+
+      var sol  = document.getElementById('ms-solution').value;
+      var cee  = CEE[sol];
+      var mpr  = MPR[sol][profil];
+      var cout = COUT[sol];
+      var rac  = Math.max(0, cout - cee - mpr);
+
+      var btn = document.getElementById('ms-send');
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours…';
+
+      var params = {
+        prenom:   prenom,
+        email:    email,
+        tel:      tel || 'Non renseigné',
+        solution: SOL_L[sol],
+        profil:   profil,
+        cee:      cee.toLocaleString('fr-FR') + ' €',
+        mpr:      mpr.toLocaleString('fr-FR') + ' €',
+        cout:     cout.toLocaleString('fr-FR') + ' €',
+        rac:      rac.toLocaleString('fr-FR') + ' €'
+      };
+
+      // Email 1 : notification au propriétaire (ecotransenergie@gmail.com)
+      var p1 = emailjs.send('EMAILJS_SERVICE_ID', 'TEMPLATE_NOTIFICATION', params);
+      // Email 2 : confirmation au client
+      var p2 = emailjs.send('EMAILJS_SERVICE_ID', 'TEMPLATE_CLIENT', params);
+
+      Promise.all([p1, p2])
+        .then(function(){
+          document.getElementById('ms-confirm').classList.add('show');
+          btn.textContent = '✓ Envoyé';
+        })
+        .catch(function(err){
+          console.error('EmailJS error:', err);
+          // fallback mailto si EmailJS non configuré
+          var sujet = encodeURIComponent('Lead simulateur - '+prenom);
+          var corps = encodeURIComponent(
+            'Nouveau lead\nPrénom : '+prenom+'\nEmail : '+email+'\nTél : '+tel+
+            '\nSolution : '+SOL_L[sol]+'\nCEE : '+cee+' €\nMPR : '+mpr+' €\nRAC : '+rac+' €'
+          );
+          window.location.href = 'mailto:ecotransenergie@gmail.com?subject='+sujet+'&body='+corps;
+          document.getElementById('ms-confirm').classList.add('show');
+          btn.disabled = false;
+          btn.textContent = 'Envoyer ma simulation gratuite →';
+        });
+    });
+  })();
+  </script>
 
   <!-- ============ TÉMOIGNAGES ============ -->
   <section id="temoignages" class="temoignages">
@@ -497,7 +721,6 @@
           <li><a href="#contact">Contact</a></li>
           <li class="footer-sep"><a href="simulateur.html#partenaire">Partenaires</a></li>
           <li><a href="professionnels.html">Professionnels &amp; Tertiaire</a></li>
-          <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
       <div class="footer-col">

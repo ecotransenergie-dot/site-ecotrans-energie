@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulateur d'économies — Eco Trans'Énergie | Meyzieu &amp; Lyon</title>
+<meta name="description" content="Simulateur de rénovation énergétique Eco Trans'Énergie : coût de l'inaction, aides CEE et Ma Prime Rénov, reste à charge. Meyzieu, Lyon et Est lyonnais.">
+<link rel="canonical" href="https://ecotransenergie.fr/simulateur.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#F5F0E8;font-family:'Source Sans 3',sans-serif;color:#4A4A4A;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;height:auto;display:block}
+  a{color:inherit}
+  input,select,textarea,button{font-family:inherit}
+  ::selection{background:#C9A86A;color:#0F5132}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:5px;background:rgba(15,81,50,.18);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:#0F5132;border:3px solid #C9A86A;cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#0F5132;border:3px solid #C9A86A;cursor:pointer}
+
+  /* Header */
+  .site-header{position:sticky;top:0;z-index:50;background:#F5F0E8;box-shadow:0 1px 12px rgba(15,81,50,.12)}
+  .header-inner{max-width:1240px;margin:0 auto;padding:0 40px;height:80px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+  .brand img{width:46px;height:46px;border-radius:50%;flex-shrink:0}
+  .brand-name{display:flex;flex-direction:column;line-height:1}
+  .brand-name .n1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px;letter-spacing:.5px;color:#0F5132}
+  .brand-name .n2{font-weight:400;font-size:10px;letter-spacing:2.5px;color:#C9A86A;margin-top:5px}
+  .nav-desktop{display:flex;align-items:center;gap:28px}
+  .nav-link{font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:#C9A86A;text-decoration:none;opacity:.9}
+  .nav-link:hover{opacity:1}
+  .nav-link.active{color:#0F5132!important;border-bottom:2px solid #C9A86A;padding-bottom:4px;opacity:1}
+  .cta-gold{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#0F5132;text-decoration:none;background:#C9A86A;padding:11px 20px;border-radius:4px;white-space:nowrap}
+  .cta-gold:hover{background:#d8ba80}
+  .nav-toggle{position:absolute;opacity:0;pointer-events:none}
+  .burger{display:none;cursor:pointer;width:44px;height:44px;align-items:center;justify-content:center}
+  .mobile-nav{display:none;flex-direction:column;background:#F5F0E8;padding:14px 22px 22px;gap:4px;border-top:1px solid rgba(201,168,106,.25)}
+  .mobile-nav a{font-family:'Montserrat',sans-serif;font-weight:600;font-size:16px;color:#C9A86A;text-decoration:none;padding:14px 4px;border-bottom:1px solid rgba(201,168,106,.2)}
+  .mobile-nav a.mcta{color:#0F5132;background:#C9A86A;padding:15px;border-radius:4px;text-align:center;margin-top:8px;border:none}
+  .mobile-nav a.active{color:#0F5132!important}
+  .nav-toggle:checked ~ .mobile-nav{display:flex}
+  .mode-bar{background:#0c4228;border-top:1px solid rgba(255,255,255,.1)}
+  .mode-bar-inner{max-width:1240px;margin:0 auto;padding:0 40px;display:flex;overflow-x:auto}
+  .mode-tab{padding:13px 24px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:rgba(255,255,255,.6);cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;white-space:nowrap}
+  .mode-tab.active{color:#fff;border-bottom-color:#C9A86A}
+
+  /* Hero */
+  .simhero{background:#0F5132;padding:42px 28px 56px;text-align:center}
+  .simhero h1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(27px,3.6vw,38px);color:#fff;line-height:1.2;letter-spacing:-.4px;text-wrap:balance}
+  .simhero h1 .gold{color:#C9A86A}
+  .simhero p{font-weight:400;font-size:16px;color:rgba(245,240,232,.9);max-width:600px;margin:14px auto 0;line-height:1.5}
+
+  .sim-wrap{max-width:1120px;margin:-28px auto 60px;padding:0 24px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .panel{background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(15,81,50,.10);padding:30px;border:1px solid rgba(15,81,50,.05)}
+  .panel h2{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;color:#0F5132;margin-bottom:20px;padding-bottom:11px;border-bottom:2px solid #C9A86A}
+  .field{margin-bottom:18px}
+  .field:last-child{margin-bottom:0}
+  .flabel{display:block;font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:#0F5132;margin-bottom:10px}
+  .flabel .sub{font-weight:400;color:#8A8A8A;font-family:'Source Sans 3',sans-serif;font-size:13px}
+  .flabel.rowlbl{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .fval{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:#C9A86A;white-space:nowrap}
+  select.inp{width:100%;padding:11px 13px;border:1.5px solid rgba(15,81,50,.18);border-radius:7px;font-size:16px;color:#4A4A4A;background:#F5F0E8}
+  .profil-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .profil-card{text-align:left;border:2px solid #e0dbd0;border-radius:8px;padding:10px 12px;cursor:pointer;background:#F5F0E8}
+  .profil-card:hover{border-color:#0F5132}
+  .profil-card.active{border-color:#0F5132;background:rgba(15,81,50,.07)}
+  .profil-card .pt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#0F5132;margin-bottom:2px;display:flex;align-items:center;gap:6px}
+  .profil-card .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .profil-card .ps{font-size:12.5px;color:#8A8A8A}
+  .sol-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .sol-card{text-align:left;border:2px solid #e0dbd0;border-radius:8px;padding:11px 13px;cursor:pointer;background:#F5F0E8}
+  .sol-card:hover{border-color:#0F5132}
+  .sol-card.active{border-color:#0F5132;background:rgba(15,81,50,.07)}
+  .sol-card .sl{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#0F5132;margin-bottom:3px}
+  .sol-card .ss{font-size:12.5px;color:#8A8A8A}
+  .sol-card .sp{font-size:13px;font-weight:600;color:#C9A86A;margin-top:4px}
+  .anah-box{background:rgba(201,168,106,.12);border:1.5px solid #C9A86A;border-radius:8px;padding:12px 14px;margin-top:14px}
+  .anah-box label{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:600;font-size:14px;color:#4A4A4A}
+  .anah-box input{width:18px;height:18px;accent-color:#0F5132;cursor:pointer}
+  .anah-box .note{font-size:12.5px;color:#8A8A8A;margin-top:6px;line-height:1.5}
+  .btn-calc{width:100%;background:#C9A86A;color:#0F5132;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;border:none;border-radius:8px;padding:14px;cursor:pointer;transition:background .2s;margin-top:4px}
+  .btn-calc:hover{background:#b8944f}
+
+  /* results */
+  .placeholder{text-align:center;padding:36px 16px;color:#8A8A8A}
+  .placeholder p{font-size:16px;line-height:1.5}
+  .r-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  .rbox{padding:14px;border-radius:8px;background:#F5F0E8}
+  .rbox .rk{font-size:12px;font-weight:600;color:#8A8A8A;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+  .rbox .rv{font-family:'Montserrat',sans-serif;font-weight:800;font-size:26px;line-height:1}
+  .rbox .rs{font-size:12.5px;color:#8A8A8A;margin-top:4px;line-height:1.4}
+  .aides{background:rgba(15,81,50,.07);border-radius:8px;padding:14px}
+  .aides h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;color:#0F5132;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
+  .aiderow{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(15,81,50,.08);font-size:14px}
+  .aidetotal{display:flex;justify-content:space-between;align-items:center;padding-top:8px;font-size:14px;font-weight:700;color:#0F5132}
+  .savebox{background:#0F5132;border-radius:8px;padding:16px;text-align:center;margin-top:12px}
+  .savebox .sl{font-size:12.5px;color:rgba(255,255,255,.7);margin-bottom:4px}
+  .savebox .sv{font-family:'Montserrat',sans-serif;font-weight:800;font-size:32px;color:#C9A86A;line-height:1}
+  .savebox .st{font-size:13px;color:rgba(255,255,255,.85);margin-top:5px}
+  .chart-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#0F5132;margin:18px 0 12px}
+  .chart-sub{font-size:13px;font-weight:600;margin-bottom:6px;color:#4A4A4A}
+  .bar-row{display:flex;gap:6px}
+  .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .bar-lbl{font-size:11px;color:#8A8A8A}
+  .bar-track{width:100%;background:#e8e3d8;border-radius:6px;height:28px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 7px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;color:#fff;white-space:nowrap;transition:width .7s ease}
+
+  .simtable{overflow-x:auto}
+  .simtable table{width:100%;min-width:560px;border-collapse:collapse;font-size:14px}
+  .simtable th{background:#0F5132;color:#fff;padding:9px 11px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;text-align:right}
+  .simtable th:first-child{text-align:left}
+  .simtable td{padding:8px 11px;text-align:right;border-bottom:1px solid #ede8de}
+  .simtable td:first-child{text-align:left;font-weight:600;color:#0F5132;white-space:nowrap}
+  .badge-ok{background:#1a7a4a;color:#fff;font-size:10px;font-family:'Montserrat',sans-serif;font-weight:700;padding:1px 7px;border-radius:20px;margin-left:6px}
+
+  .cta-card{background:#C9A86A;border-radius:12px;padding:30px;text-align:center}
+  .cta-card p{font-family:'Montserrat',sans-serif;font-weight:700;font-size:17px;color:#0F5132;margin-bottom:14px;line-height:1.4;max-width:760px;margin-left:auto;margin-right:auto}
+  .greenbtn{display:inline-block;background:#0F5132;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;padding:14px 32px;border-radius:8px;text-decoration:none;box-shadow:0 8px 24px rgba(15,81,50,.25)}
+  .greenbtn:hover{opacity:.9}
+  .cta-card small{display:block;margin-top:10px;font-size:12.5px;color:#0F5132}
+  .disclaimer{text-align:center;padding:2px 8px}
+  .disclaimer p{font-size:12px;color:#8A8A8A;line-height:1.55;max-width:800px;margin:0 auto}
+  .full{grid-column:1 / -1}
+
+  /* Partenaire */
+  .pa-wrap{max-width:820px;margin:-28px auto 60px;padding:0 24px;display:grid;gap:20px}
+  .pa-roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .pa-role{background:#F5F0E8;border-radius:8px;padding:16px 12px;text-align:center}
+  .pa-role .rt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12.5px;color:#0F5132;margin-top:8px}
+  .pa-lead{display:flex;align-items:center;gap:12px}
+  .pa-lead .llbl{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:#0F5132;min-width:130px;text-align:right}
+  .pa-result{background:#0F5132;border-radius:12px;padding:30px}
+  .pa-result .center{text-align:center;padding:6px 0 16px}
+  .pa-result .sub{font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  .pa-result .big{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(40px,6vw,62px);color:#C9A86A;line-height:1}
+  .pa-result .desc{color:rgba(255,255,255,.85);font-size:15px;margin-top:10px;line-height:1.45}
+  .pa-kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  .pa-kpi{background:rgba(255,255,255,.08);border-radius:10px;padding:16px;text-align:center}
+  .pa-kpi .kk{font-size:12px;color:rgba(255,255,255,.6);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+  .pa-kpi .kv{font-family:'Montserrat',sans-serif;font-weight:800;font-size:24px;color:#fff}
+  .pa-kpi .ks{font-size:12px;color:rgba(255,255,255,.6);margin-top:3px}
+  .note-box{background:rgba(201,168,106,.1);border:1px solid rgba(201,168,106,.4);border-radius:8px;padding:12px 14px;margin-top:14px}
+  .note-box p{font-size:12.5px;color:#4A4A4A;line-height:1.5}
+  .kit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+  .kit{border:1.5px solid #e0dbd0;border-radius:8px;padding:15px;background:#F5F0E8}
+  .kit .kt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13.5px;color:#0F5132;margin:8px 0 4px}
+  .kit .kd{font-size:12.5px;color:#8A8A8A;line-height:1.45}
+  .hidden{display:none}
+
+  /* Responsive */
+  @media (max-width:1040px){
+    .nav-desktop{display:none}
+    .burger{display:flex}
+  }
+  @media (max-width:880px){
+    .two-col{grid-template-columns:1fr}
+    .full{grid-column:1}
+  }
+  @media (max-width:560px){
+    .sim-wrap,.pa-wrap{padding-left:18px;padding-right:18px}
+    .sol-grid,.profil-grid,.r-grid,.pa-kpis,.kit-grid{grid-template-columns:1fr}
+    .pa-roles{grid-template-columns:1fr 1fr}
+    .header-inner{padding-left:20px;padding-right:20px}
+    .mode-bar-inner{padding-left:18px;padding-right:18px}
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/logo-beige.png" alt="Logo Eco Trans'Énergie" width="46" height="46">
+        <span class="brand-name">
+          <span class="n1">ECO&nbsp;TRANS'ÉNERGIE</span>
+          <span class="n2">RÉNOVATION ÉNERGÉTIQUE · MEYZIEU · LYON</span>
+        </span>
+      </a>
+      <nav class="nav-desktop">
+        <a class="nav-link" href="index.html">Particuliers</a>
+        <a class="nav-link" href="simulateur.html#partenaire">Partenaires</a>
+        <a class="nav-link" href="professionnels.html">Professionnels &amp; Tertiaire</a>
+        <a class="nav-link active" href="simulateur.html">Simulateur</a>
+        <a class="cta-gold" href="mailto:ecotransenergie@gmail.com?subject=Demande%20d'audit%20gratuit">Audit gratuit</a>
+      </nav>
+      <label class="burger" for="nav-toggle" aria-label="Ouvrir le menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F5132" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+      </label>
+    </div>
+    <nav class="mobile-nav">
+      <a href="index.html">Particuliers</a>
+      <a href="simulateur.html#partenaire">Partenaires</a>
+      <a href="professionnels.html">Professionnels &amp; Tertiaire</a>
+      <a href="simulateur.html">Simulateur</a>
+      <a class="mcta" href="mailto:ecotransenergie@gmail.com?subject=Demande%20d'audit%20gratuit">Audit gratuit</a>
+    </nav>
+    <div class="mode-bar">
+      <div class="mode-bar-inner">
+        <button type="button" class="mode-tab active" id="tabClient">Simulation client</button>
+        <button type="button" class="mode-tab" id="tabPartenaire">Partenaire</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════ MODE CLIENT ═══════════ -->
+  <div id="modeClient">
+    <section class="simhero">
+      <h1>Combien vous coûte <span class="gold">l'inaction</span> chaque année ?</h1>
+      <p>Calculez votre perte financière réelle et ce que vous économiseriez avec une rénovation énergétique à Meyzieu ou Lyon.</p>
+    </section>
+
+    <div class="sim-wrap">
+      <div class="two-col">
+        <!-- FORMULAIRE -->
+        <div class="panel">
+          <h2>Votre situation</h2>
+          <div class="field">
+            <label class="flabel rowlbl" for="facture"><span>Facture énergétique annuelle <span class="sub">(chauffage + ECS)</span></span><span class="fval" id="factureStr">2 400 €/an</span></label>
+            <input type="range" id="facture" min="500" max="6000" step="100" value="2400">
+          </div>
+          <div class="field">
+            <label class="flabel" for="chauffage">Type de chauffage actuel</label>
+            <select class="inp" id="chauffage">
+              <option value="gaz">Gaz naturel</option>
+              <option value="fioul">Fioul</option>
+              <option value="elec">Électrique (convecteurs)</option>
+              <option value="pac">PAC existante</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="flabel rowlbl" for="surface"><span>Surface habitable <span class="sub">(estime l'isolation)</span></span><span class="fval" id="surfaceStr">100 m²</span></label>
+            <input type="range" id="surface" min="30" max="300" step="5" value="100">
+          </div>
+          <div class="field">
+            <label class="flabel" for="duree">Durée de projection</label>
+            <select class="inp" id="duree">
+              <option value="5">5 ans</option>
+              <option value="10" selected>10 ans</option>
+              <option value="15">15 ans</option>
+              <option value="20">20 ans</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="flabel">Profil de revenus <span class="sub">(détermine Ma Prime Rénov &amp; ANAH)</span></label>
+            <div class="profil-grid" id="profilGrid">
+              <button type="button" class="profil-card active" data-p="TM"><div class="pt"><span class="dot" style="background:#1a6abf"></span>Très modestes</div><div class="ps">Revenus &lt; 22 000 €/an</div></button>
+              <button type="button" class="profil-card" data-p="MO"><div class="pt"><span class="dot" style="background:#e8a900"></span>Modestes</div><div class="ps">22 000 – 30 000 €/an</div></button>
+              <button type="button" class="profil-card" data-p="IN"><div class="pt"><span class="dot" style="background:#7b2fbe"></span>Intermédiaires</div><div class="ps">30 000 – 43 000 €/an</div></button>
+              <button type="button" class="profil-card" data-p="SU"><div class="pt"><span class="dot" style="background:#c0392b"></span>Supérieurs</div><div class="ps">Revenus &gt; 43 000 €/an</div></button>
+            </div>
+          </div>
+          <div class="field">
+            <label class="flabel">Solution envisagée</label>
+            <div class="sol-grid" id="solGrid"></div>
+            <div class="anah-box hidden" id="anahBox">
+              <label><input type="checkbox" id="anah"><span>Rénovation globale éligible <strong style="color:#0F5132;">ANAH Parcours Ampleur</strong></span></label>
+              <div class="note">Remplace Ma Prime Rénov <strong>et les CEE</strong> par une aide ANAH couvrant 45 à 80% du coût HT (plafond 40 000 € HT pour 3 classes DPE, 30 000 € pour 2 classes), selon vos revenus. Nécessite un Mon Accompagnateur Rénov' agréé. <em>Source : guide ANAH 2026.</em></div>
+            </div>
+          </div>
+          <button type="button" class="btn-calc" id="calcBtn">Calculer mes économies →</button>
+        </div>
+
+        <!-- RÉSULTATS -->
+        <div>
+          <div class="panel" style="padding:28px">
+            <div id="resultPlaceholder">
+              <div class="placeholder">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 12px"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+                <p>Remplissez le formulaire et cliquez sur <strong style="color:#0F5132;">Calculer</strong>.</p>
+              </div>
+            </div>
+            <div id="resultCalc" class="hidden">
+              <div class="r-grid">
+                <div class="rbox"><div class="rk">Coût de l'inaction</div><div class="rv" id="inactionStr" style="color:#C0392B">—</div><div class="rs" id="inactionSub"></div></div>
+                <div class="rbox"><div class="rk">Avec rénovation</div><div class="rv" id="actionStr" style="color:#1a7a4a">—</div><div class="rs" id="actionSub"></div></div>
+              </div>
+              <div class="aides">
+                <h4>Détail des aides — profil <span id="profilLabel"></span></h4>
+                <div id="aidesRows"></div>
+                <div class="aidetotal"><span>Reste à charge client</span><span id="resteStr"></span></div>
+              </div>
+              <div class="savebox"><div class="sl">Vous économisez sur la période</div><div class="sv" id="economieStr"></div><div class="st" id="rentableText"></div></div>
+              <div class="chart-title">Coûts cumulés comparés</div>
+              <div style="margin-bottom:12px"><div class="chart-sub">Sans travaux</div><div class="bar-row" id="barsInaction"></div></div>
+              <div><div class="chart-sub">Avec rénovation</div><div class="bar-row" id="barsAction"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLEAU -->
+        <div class="full hidden" id="tableWrap">
+          <div class="panel" style="padding:26px">
+            <h2 style="border:none;padding:0;margin-bottom:16px">Détail année par année</h2>
+            <div class="simtable">
+              <table>
+                <thead><tr><th>Année</th><th>Facture sans travaux</th><th>Cumul inaction</th><th>Facture rénové</th><th>Cumul rénovation</th><th>Économie cumulée</th></tr></thead>
+                <tbody id="tableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="full hidden" id="ctaWrap">
+          <div class="cta-card">
+            <p id="ctaText"></p>
+            <a class="greenbtn" href="mailto:ecotransenergie@gmail.com?subject=Demande%20d'audit%20gratuit">Démarrer mon audit gratuit →</a>
+            <small>Audit technique gratuit · Simulation précise sous 48h · Dossier CEE + Ma Prime Rénov géré pour vous</small>
+          </div>
+        </div>
+
+        <div class="full disclaimer">
+          <p>Simulation indicative et <strong>non contractuelle</strong>. Les montants (aides, CEE, Ma Prime Rénov, économies réalisées) sont des estimations établies à partir des barèmes 2026 et des informations saisies ; ils peuvent varier selon votre situation réelle et la réglementation en vigueur. Seul un audit technique permet un chiffrage précis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ MODE PARTENAIRE ═══════════ -->
+  <div id="modePartenaire" class="hidden">
+    <section class="simhero">
+      <h1 id="paHeroTitle">Vous avez des contacts — transformez-les en revenus.</h1>
+      <p>Calculez ce que vous pourriez générer en orientant vos contacts vers Eco Trans'Énergie.</p>
+    </section>
+
+    <div class="pa-wrap">
+      <div class="panel">
+        <h2>Qui peut devenir partenaire ?</h2>
+        <p style="font-size:14px;color:#8A8A8A;margin:14px 0 20px;line-height:1.5">Tout professionnel en contact régulier avec des propriétaires peut générer des revenus complémentaires en nous orientant ses contacts.</p>
+        <div class="pa-roles">
+          <div class="pa-role"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><div class="rt">Agent immobilier</div></div>
+          <div class="pa-role"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M7 21h10"/><path d="M5 7h14"/><path d="M5 7l-2.5 5a3 3 0 0 0 5 0z"/><path d="M19 7l-2.5 5a3 3 0 0 0 5 0z"/></svg><div class="rt">Notaire</div></div>
+          <div class="pa-role"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><div class="rt">Artisan</div></div>
+          <div class="pa-role"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11a2.1 2.1 0 0 0-3-3L4 17z"/><path d="M14 6l3 3"/><path d="M3 21h6"/></svg><div class="rt">Architecte</div></div>
+          <div class="pa-role"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><div class="rt">Courtier</div></div>
+          <div class="pa-role"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5"/><path d="M4 9v9"/><path d="M20 9v9"/><path d="M8 9v9"/><path d="M12 9v9"/><path d="M16 9v9"/><path d="M2 21h20"/></svg><div class="rt">Conseiller bancaire</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Votre situation</h2>
+        <div class="field">
+          <label class="flabel" for="aaPrenom">Votre prénom <span class="sub">(pour personnaliser)</span></label>
+          <input type="text" class="inp" id="aaPrenom" placeholder="ex : Marc">
+        </div>
+        <div class="field">
+          <label class="flabel" for="aaLeads">Combien de chantiers pouvez-vous apporter <strong>par mois</strong> ?</label>
+          <div class="pa-lead"><input type="range" id="aaLeads" min="1" max="20" step="1" value="2"><span class="llbl" id="aaLeadsLabel">2 chantiers/mois</span></div>
+        </div>
+        <div class="note-box"><p><strong style="color:#0F5132;">Simulation indicative</strong> — montants calculés sur un volume estimé et un montant moyen de travaux, sans valeur contractuelle. Les commissions effectives sont définies dans l'accord de partenariat signé entre les parties.</p></div>
+      </div>
+
+      <div class="pa-result">
+        <div class="center">
+          <div class="sub" id="aaSubtitle">En 1 an sans partenariat</div>
+          <div class="big" id="aaPerteAn">72 000 €</div>
+          <div class="desc" id="aaDescAn"></div>
+        </div>
+        <div class="pa-kpis">
+          <div class="pa-kpi"><div class="kk">Par mois</div><div class="kv" id="aaParMois">6 000 €</div><div class="ks" id="aaParMoisSub"></div></div>
+          <div class="pa-kpi"><div class="kk">Par chantier</div><div class="kv" id="aaParChantier">3 000 €</div><div class="ks">Commission versée dès réception</div></div>
+        </div>
+      </div>
+
+      <div class="panel" style="padding:26px">
+        <h2 style="border:none;padding:0;margin-bottom:16px" id="aaTableTitle">Accumulation sur 12 mois</h2>
+        <div class="simtable">
+          <table>
+            <thead><tr><th>Mois</th><th>Chantiers signés</th><th>Commission du mois</th><th>Total cumulé</th></tr></thead>
+            <tbody id="aaTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="cta-card" style="padding:26px 28px">
+        <p id="aaCtaText" style="font-size:16px"></p>
+        <a class="greenbtn" href="mailto:ecotransenergie@gmail.com?subject=Devenir%20partenaire%20Eco%20Trans%20Energie" style="padding:13px 30px">Devenir partenaire →</a>
+        <small>Sans exclusivité · Commission versée à chaque chantier finalisé · Zéro démarche de votre côté</small>
+      </div>
+
+      <div class="panel">
+        <h2>Votre kit partenaire</h2>
+        <p style="font-size:14px;color:#8A8A8A;margin:14px 0 20px">Tout ce dont vous avez besoin pour présenter Eco Trans'Énergie à vos contacts et générer vos premières commissions.</p>
+        <div class="kit-grid">
+          <div class="kit"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6"/><path d="M9 11h6"/><path d="M9 15h4"/></svg><div class="kt">Fiche produit</div><div class="kd">Solutions, chiffres clés, reste à charge moyen — à remettre directement à vos contacts.</div></div>
+          <div class="kit"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11l2 2 4-4"/><path d="M3 7a4 4 0 0 1 8 0v2"/><path d="M2 21v-2a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v2"/></svg><div class="kt">Accord de partenariat</div><div class="kd">Convention simple, sans exclusivité : rémunération, délais de versement, responsabilités.</div></div>
+          <div class="kit"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div class="kt">Script de présentation</div><div class="kd">Les bons mots pour parler rénovation sans être expert. Objections fréquentes et réponses prêtes.</div></div>
+          <div class="kit"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6"/></svg><div class="kt">Ce simulateur</div><div class="kd">À partager avec vos contacts pour les convaincre — avant même votre premier rendez-vous.</div></div>
+        </div>
+        <div style="text-align:center">
+          <a class="greenbtn" href="mailto:ecotransenergie@gmail.com?subject=Demande%20kit%20partenaire%20Eco%20Trans%20Energie" style="font-size:14.5px;padding:12px 28px">Recevoir mon kit partenaire →</a>
+          <div style="font-size:12.5px;color:#8A8A8A;margin-top:8px">Réponse sous 24h · Aucun engagement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var nf=new Intl.NumberFormat('fr-FR');
+    function fmt(n){return nf.format(Math.round(n))+' €';}
+
+    var SOLUTIONS={
+      pac_12:{label:'PAC air/eau 12 kW',sub:'Ariston / LG Hydrosplit',prixBase:12990,prixM2:null,eco:0.60,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
+      pac_14:{label:'PAC air/eau 14 kW',sub:'Ariston / LG Hydrosplit',prixBase:13990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
+      pac_14d:{label:'PAC air/eau 14 kW',sub:'Daikin / Atlantic',prixBase:16990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
+      pac_aa:{label:'PAC air/air',sub:'Climatisation réversible',prixBase:9000,prixM2:null,eco:0.55,multi:false,pacEco:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:600,MO:600,IN:600,SU:600}},
+      iso_combles:{label:'Isolation des combles',sub:'59 €/m² — MPR au m²',prixBase:null,prixM2:59,eco:0.22,multi:false,mprimePerM2:{TM:25,MO:20,IN:15,SU:0},mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:800,MO:800,IN:500,SU:500}},
+      iso_ite:{label:'Isolation extérieure (ITE)',sub:'Parcours Ampleur uniquement en 2026',prixBase:null,prixM2:190,eco:0.30,anah:true,multi:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:3000,MO:3000,IN:2000,SU:2000}},
+      ballon:{label:'Ballon thermodynamique',sub:'3 500 €',prixBase:3500,prixM2:null,eco:0.14,multi:false,mprime:{TM:1200,MO:800,IN:400,SU:0},cee:{TM:700,MO:700,IN:500,SU:500}},
+      vmc_df:{label:'VMC simple et double flux',sub:'Ventilation mécanique contrôlée',prixBase:11900,prixM2:null,eco:0.10,multi:false,mprime:{TM:2500,MO:2000,IN:1500,SU:0},cee:{TM:1000,MO:1000,IN:600,SU:600}},
+      menuiseries:{label:'Remplacement des menuiseries',sub:'Fenêtres / portes-fenêtres (≈ 10 équip.)',prixBase:8000,prixM2:null,eco:0.12,multi:false,mprime:{TM:1000,MO:800,IN:400,SU:0},cee:{TM:300,MO:300,IN:300,SU:300}},
+      reno_gl:{label:'Rénovation globale',sub:'PAC 14 + ITE PSE + VMC df',prixBase:null,prixM2:null,eco:0.82,anah:true,multi:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:7000,MO:7000,IN:5000,SU:5000}},
+      pv_6:{label:'Panneaux solaires 6 kWc',sub:'12 000 €',prixBase:12000,prixM2:null,eco:0.00,multi:false,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:0,MO:0,IN:0,SU:0}}
+    };
+    var ORDER=['pac_12','pac_14','pac_14d','pac_aa','iso_combles','iso_ite','ballon','vmc_df','menuiseries','reno_gl','pv_6'];
+    var HAUSSE={gaz:0.055,fioul:0.06,elec:0.045,pac:0.04};
+    var PAC_ECO={gaz:0.40,fioul:0.45,elec:0.55,pac:0.25};
+    var TAUX_ANAH={TM:0.80,MO:0.60,IN:0.45,SU:0.10};
+    var ANAH_PLAFOND_HT=40000, ANAH_MAX={TM:32000,MO:24000,IN:18000,SU:4000};
+    var profilLabels={TM:'Très modestes',MO:'Modestes',IN:'Intermédiaires',SU:'Supérieurs'};
+
+    var st={mode:'client',facture:2400,chauffage:'gaz',surface:100,duree:10,profil:'TM',solKey:'pac_14',anah:false,calculated:false,aaPrenom:'',aaLeads:2};
+
+    function solPrix(k,surf){var so=SOLUTIONS[k];if(!so)return 0;if(so.prixBase!==null&&so.prixBase!==undefined)return so.prixBase;if(so.prixM2!==null&&so.prixM2!==undefined)return Math.round(so.prixM2*surf);if(k==='reno_gl')return 13990+Math.round(190*surf)+11900;return 0;}
+
+    // ---- build solution cards ----
+    var solGrid=document.getElementById('solGrid');
+    ORDER.forEach(function(k){
+      var so=SOLUTIONS[k];
+      var b=document.createElement('button');
+      b.type='button';b.className='sol-card'+(k===st.solKey?' active':'');b.setAttribute('data-k',k);
+      b.innerHTML='<div class="sl">'+so.label+'</div><div class="ss">'+so.sub+'</div><div class="sp"></div>';
+      solGrid.appendChild(b);
+    });
+    solGrid.addEventListener('click',function(e){var b=e.target.closest('.sol-card');if(!b)return;st.solKey=b.getAttribute('data-k');[].forEach.call(solGrid.children,function(c){c.classList.toggle('active',c===b);});update();});
+
+    function makeBars(container,pts,maxV,color){
+      container.innerHTML='';
+      pts.forEach(function(p){
+        var col=document.createElement('div');col.className='bar-col';
+        col.innerHTML='<div class="bar-lbl">An '+p.a+'</div><div class="bar-track"><div class="bar-fill" style="background:'+color+';width:'+Math.max(3,p.v/maxV*100).toFixed(1)+'%">'+fmt(p.v)+'</div></div>';
+        container.appendChild(col);
+      });
+    }
+
+    function compute(){
+      var s=st, curSol=SOLUTIONS[s.solKey];
+      // update card prices + active
+      [].forEach.call(solGrid.children,function(c){
+        var k=c.getAttribute('data-k'),p=solPrix(k,s.surface);
+        c.querySelector('.sp').textContent=p?fmt(p)+' TTC':'—';
+        c.classList.toggle('active',k===s.solKey);
+      });
+      // anah box
+      var showAnah=!!curSol.multi;
+      document.getElementById('anahBox').classList.toggle('hidden',!showAnah);
+
+      var prix=solPrix(s.solKey,s.surface);
+      var mpr=curSol.mprimePerM2?Math.round(curSol.mprimePerM2[s.profil]*s.surface):curSol.mprime[s.profil];
+      var cee=curSol.cee[s.profil];
+      if(curSol.ceePacEau){cee=s.profil==='TM'?(s.surface>=90?7000:5000):4000;}
+      var anahAide=0, useAnah=s.anah&&curSol.anah;
+      if(useAnah){var prixHT=prix/1.055,dep=Math.min(prixHT,ANAH_PLAFOND_HT);anahAide=Math.min(Math.round(dep*TAUX_ANAH[s.profil]),ANAH_MAX[s.profil]);}
+      var aideMPR=useAnah?0:mpr, aideANAH=useAnah?anahAide:0, aideCEE=useAnah?0:cee;
+      var totalAides=aideMPR+aideANAH+aideCEE, reste=Math.max(0,prix-totalAides);
+
+      var hausse=HAUSSE[s.chauffage];
+      var ecoRate=curSol.pacEco?(PAC_ECO[s.chauffage]!=null?PAC_ECO[s.chauffage]:curSol.eco):curSol.eco;
+      var factureApres=s.facture*(1-ecoRate);
+      var cumulInaction=0,cumulAction=reste,rows=[],anneeOK=null;
+      for(var a=1;a<=s.duree;a++){
+        var fi=s.facture*Math.pow(1+hausse,a), fa=factureApres*Math.pow(1+hausse,a);
+        cumulInaction+=fi;cumulAction+=fa;
+        var eco=cumulInaction-cumulAction;
+        if(anneeOK===null&&eco>0)anneeOK=a;
+        rows.push({a:a,fi:fi,ci:cumulInaction,fa:fa,ca:cumulAction,eco:eco,ok:false});
+      }
+      if(anneeOK!==null)rows[anneeOK-1].ok=true;
+      var ecoFinale=cumulInaction-cumulAction;
+
+      return {prix:prix,aideMPR:aideMPR,aideANAH:aideANAH,aideCEE:aideCEE,reste:reste,rows:rows,anneeOK:anneeOK,ecoFinale:ecoFinale,cumulInaction:cumulInaction,cumulAction:cumulAction};
+    }
+
+    function renderResults(r){
+      var s=st;
+      document.getElementById('profilLabel').textContent=profilLabels[s.profil];
+      document.getElementById('inactionStr').textContent=fmt(r.cumulInaction);
+      document.getElementById('inactionSub').textContent='Factures cumulées sur '+s.duree+' ans sans travaux';
+      document.getElementById('actionStr').textContent=fmt(r.cumulAction);
+      document.getElementById('actionSub').textContent='Reste à charge '+fmt(r.reste)+' + énergie réduite';
+      // aides rows
+      var ar=document.getElementById('aidesRows');ar.innerHTML='';
+      function row(n,v,col){var d=document.createElement('div');d.className='aiderow';d.innerHTML='<span style="color:#4A4A4A">'+n+'</span><span style="font-weight:600;color:'+col+'">'+v+'</span>';ar.appendChild(d);}
+      row('Prix travaux (catalogue)',fmt(r.prix),'#4A4A4A');
+      if(r.aideMPR>0)row('Ma Prime Rénov','− '+fmt(r.aideMPR),'#1a7a4a');
+      if(r.aideANAH>0)row('ANAH Parcours Ampleur','− '+fmt(r.aideANAH),'#1a7a4a');
+      if(r.aideCEE>0)row('Prime CEE','− '+fmt(r.aideCEE),'#1a7a4a');
+      document.getElementById('resteStr').textContent=fmt(r.reste);
+      document.getElementById('economieStr').textContent=fmt(r.ecoFinale);
+      document.getElementById('rentableText').textContent=r.anneeOK?"Investissement amorti dès l'année "+r.anneeOK:'Rentable au-delà de la période affichée';
+
+      // chart points
+      var pts;
+      if(s.duree<=5)pts=r.rows;
+      else{var idxs=[0,Math.round(r.rows.length/4)-1,Math.round(r.rows.length/2)-1,Math.round(3*r.rows.length/4)-1,r.rows.length-1];var seen={};pts=idxs.map(function(i){return Math.max(0,i);}).filter(function(i){if(seen[i])return false;seen[i]=1;return true;}).map(function(i){return r.rows[i];});}
+      var maxV=Math.max.apply(null,pts.map(function(p){return p.ci;}).concat([1]));
+      makeBars(document.getElementById('barsInaction'),pts.map(function(p){return {a:p.a,v:p.ci};}),maxV,'#C0392B');
+      makeBars(document.getElementById('barsAction'),pts.map(function(p){return {a:p.a,v:p.ca};}),maxV,'#1a7a4a');
+
+      // table
+      var tb=document.getElementById('tableBody');tb.innerHTML='';
+      r.rows.forEach(function(rw){
+        var tr=document.createElement('tr');
+        if(rw.ok)tr.style.background='rgba(15,81,50,0.07)';else if(rw.a%2===0)tr.style.background='rgba(201,168,106,0.05)';
+        var ecoStr=(rw.eco>0?'+':'')+fmt(rw.eco), ecoColor=rw.eco>0?'#1a7a4a':'#C0392B';
+        tr.innerHTML='<td>Année '+rw.a+(rw.ok?'<span class="badge-ok">Rentable</span>':'')+'</td><td>'+fmt(rw.fi)+'</td><td style="color:#C0392B;font-weight:700">'+fmt(rw.ci)+'</td><td>'+fmt(rw.fa)+'</td><td style="color:#1a7a4a;font-weight:700">'+fmt(rw.ca)+'</td><td style="font-weight:700;color:'+ecoColor+'">'+ecoStr+'</td>';
+        tb.appendChild(tr);
+      });
+
+      var ctaText=r.anneeOK?'Votre investissement est amorti en '+r.anneeOK+' an'+(r.anneeOK>1?'s':'')+' — vous économisez '+fmt(r.ecoFinale)+' sur '+s.duree+' ans. Obtenez votre simulation précise sous 48h.':'Vous économisez '+fmt(r.ecoFinale)+' sur '+s.duree+' ans. Audit gratuit pour affiner ces chiffres chez vous.';
+      document.getElementById('ctaText').textContent=ctaText;
+    }
+
+    function update(){
+      var r=compute();
+      if(st.calculated)renderResults(r);
+    }
+
+    // ---- partenaire ----
+    function updatePartenaire(){
+      var AA_COMM=3000, p=st.aaPrenom.trim();
+      var nom=p?p.charAt(0).toUpperCase()+p.slice(1):null;
+      var leads=st.aaLeads, parMois=leads*AA_COMM, parAn=parMois*12, totalChantiers=leads*12;
+      document.getElementById('aaLeadsLabel').textContent=leads+' chantier'+(leads>1?'s':'')+'/mois';
+      document.getElementById('paHeroTitle').innerHTML=nom?nom+', vous avez des contacts — transformez-les en revenus.':'Vous avez des contacts — transformez-les en revenus.';
+      document.getElementById('aaSubtitle').textContent=nom?nom+', en 1 an sans partenariat':'En 1 an sans partenariat';
+      document.getElementById('aaPerteAn').textContent=fmt(parAn);
+      document.getElementById('aaDescAn').textContent=leads+' chantier'+(leads>1?'s':'')+'/mois × 12 mois = '+totalChantiers+' chantier'+(totalChantiers>1?'s':'')+' → '+fmt(parAn)+' de revenus';
+      document.getElementById('aaParMois').textContent=fmt(parMois);
+      document.getElementById('aaParMoisSub').textContent='pour '+leads+' chantier'+(leads>1?'s':'')+' apporté'+(leads>1?'s':'');
+      document.getElementById('aaParChantier').textContent=fmt(AA_COMM);
+      document.getElementById('aaTableTitle').textContent=nom?'Accumulation sur 12 mois — '+nom:'Accumulation sur 12 mois';
+      var tb=document.getElementById('aaTableBody');tb.innerHTML='';var cumul=0;
+      for(var m=1;m<=12;m++){var comm=leads*AA_COMM;cumul+=comm;var tr=document.createElement('tr');if(m===12)tr.style.background='rgba(15,81,50,0.07)';else if(m%2===0)tr.style.background='rgba(201,168,106,0.05)';tr.innerHTML='<td>Mois '+m+(m===12?'<span class="badge-ok">Fin d\'année</span>':'')+'</td><td>'+leads+' chantier'+(leads>1?'s':'')+'</td><td style="color:#1a7a4a;font-weight:700">'+fmt(comm)+'</td><td style="color:#1a7a4a;font-weight:700">'+fmt(cumul)+'</td>';tb.appendChild(tr);}
+      document.getElementById('aaCtaText').textContent=nom?nom+', chaque mois sans partenariat représente '+fmt(parMois)+' de revenus potentiels. Rejoignez le réseau Eco Trans\'Énergie.':'Chaque mois sans partenariat représente '+fmt(parMois)+' de revenus potentiels. Rejoignez notre réseau dès maintenant.';
+    }
+
+    // ---- wire client inputs ----
+    var facture=document.getElementById('facture');
+    facture.addEventListener('input',function(){st.facture=parseInt(this.value,10);document.getElementById('factureStr').textContent=nf.format(st.facture)+' €/an';update();});
+    var surface=document.getElementById('surface');
+    surface.addEventListener('input',function(){st.surface=parseInt(this.value,10);document.getElementById('surfaceStr').textContent=st.surface+' m²';update();});
+    document.getElementById('chauffage').addEventListener('change',function(){st.chauffage=this.value;update();});
+    document.getElementById('duree').addEventListener('change',function(){st.duree=parseInt(this.value,10);update();});
+    document.getElementById('profilGrid').addEventListener('click',function(e){var b=e.target.closest('.profil-card');if(!b)return;st.profil=b.getAttribute('data-p');[].forEach.call(this.children,function(c){c.classList.toggle('active',c===b);});update();});
+    document.getElementById('anah').addEventListener('change',function(){st.anah=this.checked;update();});
+    document.getElementById('calcBtn').addEventListener('click',function(){
+      st.calculated=true;
+      document.getElementById('resultPlaceholder').classList.add('hidden');
+      document.getElementById('resultCalc').classList.remove('hidden');
+      document.getElementById('tableWrap').classList.remove('hidden');
+      document.getElementById('ctaWrap').classList.remove('hidden');
+      renderResults(compute());
+    });
+
+    // ---- wire partenaire inputs ----
+    document.getElementById('aaPrenom').addEventListener('input',function(){st.aaPrenom=this.value;updatePartenaire();});
+    document.getElementById('aaLeads').addEventListener('input',function(){st.aaLeads=parseInt(this.value,10);updatePartenaire();});
+
+    // ---- tabs ----
+    function setMode(m){
+      st.mode=m;
+      document.getElementById('tabClient').classList.toggle('active',m==='client');
+      document.getElementById('tabPartenaire').classList.toggle('active',m==='partenaire');
+      document.getElementById('modeClient').classList.toggle('hidden',m!=='client');
+      document.getElementById('modePartenaire').classList.toggle('hidden',m!=='partenaire');
+      if(m==='partenaire')updatePartenaire();
+    }
+    document.getElementById('tabClient').addEventListener('click',function(){setMode('client');});
+    document.getElementById('tabPartenaire').addEventListener('click',function(){setMode('partenaire');});
+
+    // init
+    compute();
+    updatePartenaire();
+    if(location.hash==='#partenaire')setMode('partenaire');
+  })();
+  </script>
+
+  <footer style="background:#0F5132;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+    <span style="font-size:13px;color:rgba(245,240,232,.45)">© 2026 Eco Trans'Énergie — Meyzieu &amp; Lyon</span>
+    <nav style="display:flex;gap:24px;flex-wrap:wrap">
+      <a href="index.html" style="font-size:13px;color:rgba(245,240,232,.6);text-decoration:none">Accueil</a>
+      <a href="professionnels.html" style="font-size:13px;color:rgba(245,240,232,.6);text-decoration:none">Professionnels &amp; Tertiaire</a>
+      <a href="blog.html" style="font-size:13px;color:#C9A86A;text-decoration:none;font-weight:600">Blog</a>
+      <a href="professionnels.html#form" style="font-size:13px;color:rgba(245,240,232,.6);text-decoration:none">Contact</a>
+    </nav>
+  </footer>
+</body>
+</html>

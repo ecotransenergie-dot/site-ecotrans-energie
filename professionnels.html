@@ -272,6 +272,36 @@
   .footer-bottom .row{border-top:1px solid rgba(201,168,106,.3);padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .footer-bottom span{font-weight:300;font-size:12px;color:#8A8A8A}
 
+  /* ===== Section APER solaire ===== */
+  .aper-seuils{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0}
+  .aper-chip{background:#fff;border-radius:8px;padding:20px 22px;border-top:3px solid #0F5132;box-shadow:0 2px 12px rgba(15,81,50,.06)}
+  .aper-chip.urgent{border-top-color:#b91c1c}
+  .aper-chip.warn{border-top-color:#C9A86A}
+  .aper-chip-seuil{font-family:'Montserrat',sans-serif;font-weight:800;font-size:18px;color:#0F5132;margin-bottom:4px}
+  .aper-chip.urgent .aper-chip-seuil{color:#b91c1c}
+  .aper-chip-date{font-size:13px;font-weight:700;color:#4A4A4A;margin-bottom:6px}
+  .aper-chip-status{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:30px}
+  .aper-chip.urgent .aper-chip-status{background:rgba(220,38,38,.1);color:#b91c1c;border:1px solid rgba(220,38,38,.3)}
+  .aper-chip.warn .aper-chip-status{background:rgba(201,168,106,.12);color:#92400e;border:1px solid rgba(201,168,106,.4)}
+  .aper-chip.ok .aper-chip-status{background:rgba(15,81,50,.08);color:#0F5132;border:1px solid rgba(15,81,50,.2)}
+
+  .aper-body{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:8px}
+  .aper-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0 0 24px}
+  .aper-list li{font-size:15.5px;color:#4A4A4A;padding-left:20px;position:relative;line-height:1.5}
+  .aper-list li::before{content:'→';position:absolute;left:0;color:#C9A86A;font-weight:700}
+
+  .aper-box{background:#0F5132;border-radius:10px;padding:28px 26px}
+  .aper-box-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#C9A86A;margin-bottom:16px}
+  .aper-box-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+  .aper-box-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .aper-box-row:last-child{border-bottom:none}
+  .aper-box-label{font-size:13px;color:rgba(245,240,232,.7)}
+  .aper-box-val{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:#fff}
+  .aper-box-note{font-size:12px;color:rgba(245,240,232,.45);margin-bottom:18px;line-height:1.55}
+  .aper-box-cta{display:block;text-align:center;background:#C9A86A;color:#0F5132;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;text-decoration:none;padding:13px;border-radius:6px;margin-bottom:10px}
+  .aper-box-link{display:block;text-align:center;font-size:13px;color:rgba(245,240,232,.6);text-decoration:none;padding:6px}
+  .aper-box-link:hover{color:#C9A86A}
+
   /* ===== Responsive ===== */
   @media (max-width:1040px){
     .nav-desktop{display:none}
@@ -286,7 +316,11 @@
     .hero-media{display:none}
     .form-grid{grid-template-columns:1fr;gap:40px}
   }
+  @media (max-width:980px){
+    .aper-body{grid-template-columns:1fr}
+  }
   @media (max-width:767px){
+    .aper-seuils{grid-template-columns:1fr}
     .grid-3,.steps,.chiffres,.form-2{grid-template-columns:1fr}
     .dstep{grid-template-columns:44px 1fr;gap:0 20px}
     .dstep-circle{width:40px;height:40px}
@@ -437,6 +471,88 @@
           <h3>Votre bâtiment fait &gt; 1 000 m² ?</h3>
           <p>Vous êtes soumis au Décret Tertiaire : -40% de consommation d'ici 2030. Sanctions à partir de 2027.</p>
           <a href="#sim2026">Calculer ma prime CEE →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLAIRE APER -->
+  <section id="solaire" class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Loi APER 2023</span>
+        <h2 class="h2">Ombrières solaires : votre parking est peut-être déjà hors délai</h2>
+        <p style="font-size:17px;color:#4A4A4A;margin-top:12px;max-width:680px;line-height:1.6">La loi du 10 mars 2023 impose des ombrières photovoltaïques sur les parkings extérieurs de plus de 80 places. La première échéance est <strong>déjà passée</strong> pour les grands sites.</p>
+      </div>
+
+      <div class="aper-seuils">
+        <div class="aper-chip urgent">
+          <p class="aper-chip-seuil">+ 500 places</p>
+          <p class="aper-chip-date">Échéance : 1er juillet 2026</p>
+          <span class="aper-chip-status">Hors délai depuis juillet 2026</span>
+        </div>
+        <div class="aper-chip warn">
+          <p class="aper-chip-seuil">80 à 500 places</p>
+          <p class="aper-chip-date">Échéance : 1er juillet 2028</p>
+          <span class="aper-chip-status">24 mois pour agir</span>
+        </div>
+        <div class="aper-chip ok">
+          <p class="aper-chip-seuil">Moins de 80 places</p>
+          <p class="aper-chip-date">Non concerné</p>
+          <span class="aper-chip-status">Hors obligation</span>
+        </div>
+      </div>
+
+      <div class="aper-body">
+        <div>
+          <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#0F5132;margin-bottom:16px">Ce que la loi impose concrètement</h3>
+          <ul class="aper-list">
+            <li>Couvrir <strong>au minimum 50 % de la superficie</strong> du parking avec des ombrières équipées de panneaux photovoltaïques</li>
+            <li>Obligation valable pour les <strong>parkings existants et les nouvelles constructions</strong></li>
+            <li>Concerne les parkings de supermarchés, entrepôts, zones commerciales, entreprises avec parking salariés</li>
+            <li>Exemptions : parkings couverts, souterrains, impossibilité technique documentée, monuments historiques</li>
+          </ul>
+          <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#0F5132;margin-bottom:16px;margin-top:28px">Les aides disponibles pour financer l'installation</h3>
+          <ul class="aper-list">
+            <li><strong>Prime à l'autoconsommation</strong> versée à la mise en service (jusqu'à 200 €/kWc selon la puissance)</li>
+            <li><strong>Tarif d'achat garanti 20 ans</strong> pour le surplus injecté sur le réseau (obligation d'achat EDF)</li>
+            <li>Pour les grandes installations (&gt; 100 kWc) : <strong>appel d'offres CRE</strong> avec tarif sécurisé</li>
+            <li>Cumulable avec les primes CEE si d'autres travaux sont réalisés en parallèle</li>
+          </ul>
+          <a href="blog-loi-aper-ombrieres-solaires-parking.html" style="display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#0F5132;border:2px solid #0F5132;text-decoration:none;padding:12px 22px;border-radius:4px;margin-top:8px">Lire le guide complet loi APER →</a>
+        </div>
+
+        <div class="aper-box">
+          <p class="aper-box-title">Exemple — Parking 150 places (zone Lyon)</p>
+          <div class="aper-box-rows">
+            <div class="aper-box-row">
+              <span class="aper-box-label">Surface à couvrir (50 %)</span>
+              <span class="aper-box-val">~1 100 m²</span>
+            </div>
+            <div class="aper-box-row">
+              <span class="aper-box-label">Puissance installée estimée</span>
+              <span class="aper-box-val">~110 kWc</span>
+            </div>
+            <div class="aper-box-row">
+              <span class="aper-box-label">Production annuelle (zone H2)</span>
+              <span class="aper-box-val">~121 000 kWh</span>
+            </div>
+            <div class="aper-box-row">
+              <span class="aper-box-label">Économies autoconsommation</span>
+              <span class="aper-box-val">~17 000 €/an</span>
+            </div>
+            <div class="aper-box-row">
+              <span class="aper-box-label">Coût installation ombrières</span>
+              <span class="aper-box-val">~165 000 €</span>
+            </div>
+            <div class="aper-box-row">
+              <span class="aper-box-label">Retour sur investissement</span>
+              <span class="aper-box-val">~9-10 ans</span>
+            </div>
+          </div>
+          <p class="aper-box-note">Les délais de raccordement Enedis sont de 3 à 6 mois. Pour respecter l'échéance de juillet 2028, commencer les démarches fin 2026 est recommandé.</p>
+          <a class="aper-box-cta" href="#form">Étude de faisabilité gratuite →</a>
+          <a class="aper-box-link" href="blog-loi-aper-ombrieres-solaires-parking.html">Guide complet avec 3 cas chiffrés ↗</a>
         </div>
       </div>
     </div>

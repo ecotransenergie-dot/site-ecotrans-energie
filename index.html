@@ -147,13 +147,24 @@
   .faq-item[open] summary .chev{transform:rotate(180deg)}
   .faq-item .a{font-weight:400;font-size:16px;line-height:1.62;color:#4A4A4A;padding:0 26px 24px}
 
-  /* ---------- Contact CTA ---------- */
-  .contact{background:#C9A86A;padding:74px 0}
-  .contact-inner{display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap}
-  .contact .l{max-width:660px}
-  .contact h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:33px;color:#0F5132;line-height:1.2;letter-spacing:-.3px;text-wrap:balance}
-  .contact p{font-weight:400;font-size:16px;line-height:1.55;color:#0F5132;margin-top:14px}
-  .contact-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+  /* ---------- Contact CTA + Formulaire ---------- */
+  .contact{background:#0F5132;padding:74px 0}
+  .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .contact h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:33px;color:#C9A86A;line-height:1.2;letter-spacing:-.3px;text-wrap:balance}
+  .contact p{font-weight:400;font-size:16px;line-height:1.55;color:rgba(245,240,232,.85);margin-top:14px}
+  .contact-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:28px}
+  .contact-tel{font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#fff;text-decoration:none}
+  .contact-note{font-weight:300;font-size:13px;color:rgba(245,240,232,.6)}
+  /* Formulaire */
+  .devis-form{background:rgba(255,255,255,.06);border:1px solid rgba(201,168,106,.3);border-radius:6px;padding:36px}
+  .devis-form h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:1.5px;text-transform:uppercase;color:#C9A86A;margin-bottom:22px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .devis-form input,.devis-form select{width:100%;padding:13px 16px;border:none;border-radius:4px;font-family:'Source Sans 3',sans-serif;font-size:15px;color:#4A4A4A;background:#F5F0E8;margin-bottom:12px;outline:none;transition:box-shadow .2s}
+  .devis-form input:focus,.devis-form select:focus{box-shadow:0 0 0 2px #C9A86A}
+  .devis-form select{color:#6b5e4e;cursor:pointer}
+  .devis-form .btn-submit{width:100%;padding:16px;background:#C9A86A;color:#0F5132;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:4px;cursor:pointer;margin-top:4px;transition:background .2s}
+  .devis-form .btn-submit:hover{background:#d8ba80}
+  .form-note{font-size:12px;color:rgba(245,240,232,.45);text-align:center;margin-top:12px}
   .btn-green{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#fff;background:#0F5132;text-decoration:none;padding:18px 36px;border-radius:4px;white-space:nowrap;box-shadow:0 8px 24px rgba(15,81,50,.25)}
   .btn-green:hover{background:#0c4228}
   .contact-tel{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#0F5132;text-decoration:none}
@@ -192,15 +203,18 @@
     .footer-grid{grid-template-columns:1fr 1fr;row-gap:40px}
     .hero-grid{grid-template-columns:1fr;gap:0}
     .hero-media{display:none}
+    .contact-inner{grid-template-columns:1fr;gap:40px}
   }
   @media (max-width:767px){
     /* single column everywhere */
-    .grid-3,.steps,.chiffres,.grid-2,.footer-grid{grid-template-columns:1fr}
+    .grid-3,.steps,.chiffres,.grid-2,.contact-inner,.footer-grid{grid-template-columns:1fr}
     /* full-width buttons */
     .btn-gold,.btn-green,.cta-gold,.link-under,.contact-tel{width:100%;text-align:center}
     .hero-actions{align-items:stretch}
     .contact-actions{align-self:stretch;align-items:stretch}
     .contact-actions{width:100%}
+    .devis-form{min-width:unset;width:100%}
+    .form-row{grid-template-columns:1fr}
     /* tighter padding, no horizontal overflow */
     .wrap,.header-inner,.chiffres,.faq-inner,.footer-grid,.footer-bottom{padding-left:22px;padding-right:22px}
     .chiffres{padding-top:36px;padding-bottom:36px}
@@ -234,7 +248,7 @@
         <a class="nav-link" href="simulateur.html#partenaire">Partenaires</a>
         <a class="nav-link" href="professionnels.html">Professionnels &amp; Tertiaire</a>
         <a class="nav-link" href="simulateur.html">Simulateur</a>
-        <a class="cta-gold" href="mailto:ecotransenergie@gmail.com?subject=Demande%20d'audit%20gratuit">Audit gratuit</a>
+        <a class="cta-gold" href="#formulaire-devis">Audit gratuit</a>
       </nav>
       <label class="burger" for="nav-toggle" aria-label="Ouvrir le menu">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F5132" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
@@ -245,7 +259,7 @@
       <a href="simulateur.html#partenaire">Partenaires</a>
       <a href="professionnels.html">Professionnels &amp; Tertiaire</a>
       <a href="simulateur.html">Simulateur</a>
-      <a class="mcta" href="mailto:ecotransenergie@gmail.com?subject=Demande%20d'audit%20gratuit">Audit gratuit</a>
+      <a class="mcta" href="#formulaire-devis">Audit gratuit</a>
     </nav>
   </header>
 
@@ -264,9 +278,11 @@
       </div>
       <div class="hero-media">
         <div class="ph">
-          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,106,0.8)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
-          <span class="cap">[ photo · maison rénovée à Meyzieu ]</span>
-          <span class="cap2">1200 × 1050px</span>
+          <span class="cap">RESTE À CHARGE MOYEN</span>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:72px;color:#C9A86A;line-height:1;text-align:center">1 000 €</div>
+          <span class="cap">APRÈS CEE + MA PRIME RÉNOV</span>
+          <span class="cap2" style="margin-top:10px">POMPE À CHALEUR AIR/EAU · MEYZIEU &amp; LYON</span>
+          <a href="simulateur.html" style="margin-top:24px;background:#C9A86A;color:#0F5132;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;padding:12px 24px;border-radius:4px;text-decoration:none;letter-spacing:.5px">CALCULER MES AIDES →</a>
         </div>
       </div>
     </div>
@@ -277,7 +293,7 @@
     <div class="wrap chiffres" style="max-width:1240px">
       <div class="stat"><div class="num">1 000 €</div><div class="lbl">Reste à charge moyen après subventions</div></div>
       <div class="stat"><div class="num">7 000 €</div><div class="lbl">Prime CEE moyenne versée</div></div>
-      <div class="stat"><div class="num">48h</div><div class="lbl">Simulation de votre projet</div></div>
+      <div class="stat"><div class="num">48h</div><div class="lbl">Diagnostic de votre projet</div></div>
       <div class="stat"><div class="num">100%</div><div class="lbl">Dossier subvention géré pour vous</div></div>
     </div>
   </section>
@@ -353,6 +369,17 @@
           <p>Nous vous accompagnons à la réception des travaux et au versement de vos primes.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ SIMULATEUR TEASER ============ -->
+  <section id="simulateur-section" style="background:#F5F0E8;border-top:3px solid rgba(201,168,106,.5);border-bottom:3px solid rgba(201,168,106,.3)">
+    <div class="wrap" style="text-align:center;padding:88px 40px">
+      <span class="eyebrow">Simulateur d'aides 2026</span>
+      <h2 class="h2" style="max-width:640px;margin:12px auto 0">Calculez votre reste à charge en 2 minutes</h2>
+      <p style="font-size:17px;line-height:1.65;color:#4A4A4A;max-width:540px;margin:20px auto 0">Entrez votre situation : notre outil calcule automatiquement vos aides CEE et Ma Prime Rénov. Résultat immédiat, sans inscription.</p>
+      <a class="btn-gold" href="simulateur.html" style="display:inline-block;margin-top:36px;padding:18px 44px;font-size:16px">Calculer mes aides maintenant</a>
+      <p style="margin-top:16px;font-size:13px;color:#8A8A8A">Gratuit · Sans inscription · Résultat immédiat</p>
     </div>
   </section>
 
@@ -461,18 +488,60 @@
     </div>
   </section>
 
-  <!-- ============ CONTACT CTA ============ -->
-  <section id="contact" class="contact">
-    <div class="wrap contact-inner">
-      <div class="l">
-        <h2>Calculez votre reste à charge en 2 minutes</h2>
-        <p>Obtenez une simulation gratuite et précise de vos aides CEE et Ma Prime Rénov pour votre projet à Meyzieu ou Lyon. Audit technique gratuit à domicile. Résultat sous 48 heures. Sans engagement.</p>
+  <!-- ============ FORMULAIRE DEVIS ============ -->
+  <section id="formulaire-devis" class="contact">
+    <div class="wrap">
+      <div class="contact-inner">
+        <div>
+          <span class="eyebrow" style="color:rgba(201,168,106,.7)">Diagnostic gratuit</span>
+          <h2>Obtenez votre simulation personnalisée sous 48h</h2>
+          <p>Un expert visite votre logement, analyse votre situation et vous remet une simulation chiffrée : coût total, montant de vos aides, reste à charge exact. Gratuit et sans engagement.</p>
+          <div class="contact-actions">
+            <a href="tel:+33482533165" class="contact-tel">04 82 53 31 65</a>
+            <span class="contact-note">Lun–Ven 8h–19h · Sam 9h–17h</span>
+          </div>
+        </div>
+        <div class="devis-form">
+          <h3>Votre diagnostic gratuit en 48h</h3>
+          <form name="devis" method="POST" action="/merci" data-netlify="true">
+            <input type="hidden" name="form-name" value="devis">
+            <div class="form-row">
+              <input type="text" name="prenom" placeholder="Prénom" required>
+              <input type="text" name="nom" placeholder="Nom" required>
+            </div>
+            <input type="tel" name="telephone" placeholder="Téléphone" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="code_postal" placeholder="Code postal" required>
+            <select name="chauffage" required>
+              <option value="" disabled selected>Mode de chauffage actuel</option>
+              <option value="gaz">Chaudière gaz</option>
+              <option value="fioul">Chaudière fioul</option>
+              <option value="electrique">Électrique (radiateurs)</option>
+              <option value="pac">Pompe à chaleur (déjà équipé)</option>
+              <option value="autre">Autre</option>
+            </select>
+            <select name="projet" required>
+              <option value="" disabled selected>Type de projet</option>
+              <option value="pac">Pompe à chaleur air/eau</option>
+              <option value="renovation-globale">Rénovation globale (Parcours Ampleur)</option>
+              <option value="photovoltaique">Panneaux photovoltaïques</option>
+              <option value="autre">Autre</option>
+              <option value="nsp">Je ne sais pas encore</option>
+            </select>
+            <button type="submit" class="btn-submit">Je demande mon diagnostic gratuit</button>
+          </form>
+          <p class="form-note">Sans engagement · Réponse sous 48h · Données confidentielles</p>
+        </div>
       </div>
-      <div class="contact-actions">
-        <a class="btn-green" href="mailto:contact@ecotransenergie.fr?subject=Demande%20d'audit%20gratuit">Démarrer mon audit gratuit</a>
-        <a class="contact-tel" href="tel:+33482533165">ou appelez le 04 82 53 31 65</a>
-        <span class="contact-note">Audit gratuit · Simulation sous 48h · Aucun engagement</span>
-      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT BAS DE PAGE ============ -->
+  <section id="contact" style="background:#F5F0E8;padding:56px 0;border-top:1px solid rgba(201,168,106,.35)">
+    <div class="wrap" style="text-align:center">
+      <p class="eyebrow">Une question urgente ?</p>
+      <a href="tel:+33482533165" style="display:block;font-family:'Montserrat',sans-serif;font-weight:800;font-size:42px;color:#0F5132;text-decoration:none;margin-top:12px;line-height:1">04 82 53 31 65</a>
+      <p style="margin-top:12px;font-size:14px;color:#8A8A8A">Lundi–Vendredi 8h–19h · Samedi 9h–17h</p>
     </div>
   </section>
 

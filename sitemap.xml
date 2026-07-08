@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://ecotransenergie.fr/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://ecotransenergie.fr/simulateur.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ecotransenergie.fr/professionnels.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ecotransenergie.fr/partenaires.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ecotransenergie.fr/guide-aides-financieres-2026.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ecotransenergie.fr/blog.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ecotransenergie.fr/blog-pac-air-eau-maison-lyon.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ecotransenergie.fr/blog-maprimerenov-2026-lyon.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ecotransenergie.fr/blog-pac-air-eau-tertiaire-lyon.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ecotransenergie.fr/blog-prime-cee-tertiaire-2026.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ecotransenergie.fr/blog-decret-tertiaire-operat-2026.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ecotransenergie.fr/blog-loi-aper-ombrieres-solaires-parking.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+</urlset>

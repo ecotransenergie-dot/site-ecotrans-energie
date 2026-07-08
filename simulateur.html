@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -9,6 +9,43 @@
   gtag('js', new Date());
   gtag('config', 'G-KN3LHH01CF');
 </script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '805216059249030');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=805216059249030&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- LinkedIn Insight Tag -->
+<script type="text/javascript">
+_linkedin_partner_id = "9335850";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script>
+<script type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=9335850&fmt=gif" />
+</noscript>
+<!-- End LinkedIn Insight Tag -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simulateur d'économies — Eco Trans'Énergie | Lyon & Métropole</title>
@@ -416,17 +453,17 @@
     function fmt(n){return nf.format(Math.round(n))+' €';}
 
     var SOLUTIONS={
-      pac_12:{label:'PAC air/eau 12 kW',sub:'Pompe à chaleur air/eau',prixBase:12990,prixM2:null,eco:0.60,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
-      pac_14:{label:'PAC air/eau 14 kW',sub:'Pompe à chaleur air/eau',prixBase:13990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
-      pac_14d:{label:'PAC air/eau 14 kW Premium',sub:'Pompe à chaleur air/eau',prixBase:16990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
+      pac_12:{label:'PAC air/eau 12 kW',sub:'Pompe à chaleur air/eau',prixBase:12990,prixM2:null,eco:0.60,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:6500,MO:4000,IN:4000,SU:4000}},
+      pac_14:{label:'PAC air/eau 14 kW',sub:'Pompe à chaleur air/eau',prixBase:13990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:6500,MO:4000,IN:4000,SU:4000}},
+      pac_14d:{label:'PAC air/eau 14 kW Premium',sub:'Pompe à chaleur air/eau',prixBase:16990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:6500,MO:4000,IN:4000,SU:4000}},
       pac_aa:{label:'PAC air/air',sub:'Climatisation réversible',prixBase:9000,prixM2:null,eco:0.55,multi:false,pacEco:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:600,MO:600,IN:600,SU:600}},
-      iso_combles:{label:'Isolation des combles',sub:'59 €/m² — MPR au m²',prixBase:null,prixM2:59,eco:0.22,multi:false,mprimePerM2:{TM:25,MO:20,IN:15,SU:0},mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:800,MO:800,IN:500,SU:500}},
+      iso_combles:{label:'Isolation des combles',sub:'Combles perdus ou aménagés',prixBase:null,prixM2:59,eco:0.22,multi:false,mprimePerM2:{TM:25,MO:20,IN:15,SU:0},mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:800,MO:800,IN:500,SU:500}},
       iso_ite:{label:'Isolation extérieure (ITE)',sub:'Parcours Ampleur uniquement en 2026',prixBase:null,prixM2:190,eco:0.30,anah:true,multi:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:3000,MO:3000,IN:2000,SU:2000}},
-      ballon:{label:'Ballon thermodynamique',sub:'3 500 €',prixBase:3500,prixM2:null,eco:0.14,multi:false,mprime:{TM:1200,MO:800,IN:400,SU:0},cee:{TM:700,MO:700,IN:500,SU:500}},
+      ballon:{label:'Ballon thermodynamique',sub:'Eau chaude sanitaire',prixBase:3500,prixM2:null,eco:0.14,multi:false,mprime:{TM:1200,MO:800,IN:400,SU:0},cee:{TM:700,MO:700,IN:500,SU:500}},
       vmc_df:{label:'VMC double flux',sub:'Ventilation mécanique contrôlée',prixBase:11900,prixM2:null,eco:0.10,multi:false,mprime:{TM:2500,MO:2000,IN:1500,SU:0},cee:{TM:1000,MO:1000,IN:600,SU:600}},
       menuiseries:{label:'Remplacement des menuiseries',sub:'Fenêtres / portes-fenêtres (≈ 10 équip.)',prixBase:8000,prixM2:null,eco:0.12,multi:false,mprime:{TM:1000,MO:800,IN:400,SU:0},cee:{TM:300,MO:300,IN:300,SU:300}},
       reno_gl:{label:'Rénovation globale',sub:'PAC 14 + ITE PSE + VMC df',prixBase:null,prixM2:null,eco:0.82,anah:true,multi:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:7000,MO:7000,IN:5000,SU:5000}},
-      pv_6:{label:'Panneaux solaires 6 kWc',sub:'12 000 €',prixBase:12000,prixM2:null,eco:0.00,multi:false,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:0,MO:0,IN:0,SU:0}}
+      pv_6:{label:'Panneaux solaires 6 kWc',sub:'Autoconsommation solaire',prixBase:12000,prixM2:null,eco:0.00,multi:false,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:0,MO:0,IN:0,SU:0}}
     };
     var ORDER=['pac_12','pac_14','pac_14d','pac_aa','iso_combles','iso_ite','ballon','vmc_df','menuiseries','reno_gl','pv_6'];
     var HAUSSE={gaz:0.055,fioul:0.06,elec:0.045,pac:0.04};

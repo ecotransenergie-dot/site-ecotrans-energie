@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /merci.html
+Disallow: /mentions-legales.html
+Disallow: /preview.html
+Disallow: /preview-pro.html
+
+Sitemap: https://ecotransenergie.fr/sitemap.xml

@@ -1,11 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KN3LHH01CF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KN3LHH01CF');
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulateur d'économies — Eco Trans'Énergie | Meyzieu &amp; Lyon</title>
-<meta name="description" content="Simulateur de rénovation énergétique Eco Trans'Énergie : coût de l'inaction, aides CEE et Ma Prime Rénov, reste à charge. Meyzieu, Lyon et Est lyonnais.">
+<title>Simulateur d'économies — Eco Trans'Énergie | Lyon & Métropole</title>
+<meta name="description" content="Simulateur de rénovation énergétique Eco Trans'Énergie : calculez vos aides CEE et Ma Prime Rénov, votre reste à charge. Lyon, Villeurbanne, Bron, Vénissieux et toute la Métropole.">
 <link rel="canonical" href="https://ecotransenergie.fr/simulateur.html">
+<link rel="icon" href="assets/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -179,12 +188,12 @@
         <img src="assets/logo-beige.png" alt="Logo Eco Trans'Énergie" width="46" height="46">
         <span class="brand-name">
           <span class="n1">ECO&nbsp;TRANS'ÉNERGIE</span>
-          <span class="n2">RÉNOVATION ÉNERGÉTIQUE · MEYZIEU · LYON</span>
+          <span class="n2">RÉNOVATION ÉNERGÉTIQUE · LYON & MÉTROPOLE</span>
         </span>
       </a>
       <nav class="nav-desktop">
         <a class="nav-link" href="index.html">Particuliers</a>
-        <a class="nav-link" href="simulateur.html#partenaire">Partenaires</a>
+        <a class="nav-link" href="partenaires.html">Partenaires</a>
         <a class="nav-link" href="professionnels.html">Professionnels &amp; Tertiaire</a>
         <a class="nav-link active" href="simulateur.html">Simulateur</a>
         <a class="cta-gold" href="index.html#formulaire-devis">Audit gratuit</a>
@@ -195,7 +204,7 @@
     </div>
     <nav class="mobile-nav">
       <a href="index.html">Particuliers</a>
-      <a href="simulateur.html#partenaire">Partenaires</a>
+      <a href="partenaires.html">Partenaires</a>
       <a href="professionnels.html">Professionnels &amp; Tertiaire</a>
       <a href="simulateur.html">Simulateur</a>
       <a class="mcta" href="index.html#formulaire-devis">Audit gratuit</a>
@@ -212,7 +221,7 @@
   <div id="modeClient">
     <section class="simhero">
       <h1>Combien vous coûte <span class="gold">l'inaction</span> chaque année ?</h1>
-      <p>Calculez votre perte financière réelle et ce que vous économiseriez avec une rénovation énergétique à Meyzieu ou Lyon.</p>
+      <p>Calculez votre perte financière réelle et ce que vous économiseriez avec une rénovation énergétique à Lyon et en Métropole.</p>
     </section>
 
     <div class="sim-wrap">
@@ -380,7 +389,7 @@
 
       <div class="cta-card" style="padding:26px 28px">
         <p id="aaCtaText" style="font-size:16px"></p>
-        <a class="greenbtn" href="mailto:ecotransenergie@gmail.com?subject=Devenir%20partenaire%20Eco%20Trans%20Energie" style="padding:13px 30px">Devenir partenaire →</a>
+        <a class="greenbtn" href="partenaires.html" style="padding:13px 30px">Devenir partenaire →</a>
         <small>Sans exclusivité · Commission versée à chaque chantier finalisé · Zéro démarche de votre côté</small>
       </div>
 
@@ -394,7 +403,7 @@
           <div class="kit"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A86A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6"/></svg><div class="kt">Ce simulateur</div><div class="kd">À partager avec vos contacts pour les convaincre — avant même votre premier rendez-vous.</div></div>
         </div>
         <div style="text-align:center">
-          <a class="greenbtn" href="mailto:ecotransenergie@gmail.com?subject=Demande%20kit%20partenaire%20Eco%20Trans%20Energie" style="font-size:14.5px;padding:12px 28px">Recevoir mon kit partenaire →</a>
+          <a class="greenbtn" href="mailto:contact@ecotransenergie.fr?subject=Demande%20kit%20partenaire%20Eco%20Trans%20Energie" style="font-size:14.5px;padding:12px 28px">Recevoir mon kit partenaire →</a>
           <div style="font-size:12.5px;color:#8A8A8A;margin-top:8px">Réponse sous 24h · Aucun engagement</div>
         </div>
       </div>
@@ -407,14 +416,14 @@
     function fmt(n){return nf.format(Math.round(n))+' €';}
 
     var SOLUTIONS={
-      pac_12:{label:'PAC air/eau 12 kW',sub:'Ariston / LG Hydrosplit',prixBase:12990,prixM2:null,eco:0.60,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
-      pac_14:{label:'PAC air/eau 14 kW',sub:'Ariston / LG Hydrosplit',prixBase:13990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
-      pac_14d:{label:'PAC air/eau 14 kW',sub:'Daikin / Atlantic',prixBase:16990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
+      pac_12:{label:'PAC air/eau 12 kW',sub:'Pompe à chaleur air/eau',prixBase:12990,prixM2:null,eco:0.60,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
+      pac_14:{label:'PAC air/eau 14 kW',sub:'Pompe à chaleur air/eau',prixBase:13990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
+      pac_14d:{label:'PAC air/eau 14 kW Premium',sub:'Pompe à chaleur air/eau',prixBase:16990,prixM2:null,eco:0.63,multi:false,pacEco:true,ceePacEau:true,mprime:{TM:5000,MO:4000,IN:3000,SU:0},cee:{TM:4000,MO:4000,IN:2500,SU:2500}},
       pac_aa:{label:'PAC air/air',sub:'Climatisation réversible',prixBase:9000,prixM2:null,eco:0.55,multi:false,pacEco:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:600,MO:600,IN:600,SU:600}},
       iso_combles:{label:'Isolation des combles',sub:'59 €/m² — MPR au m²',prixBase:null,prixM2:59,eco:0.22,multi:false,mprimePerM2:{TM:25,MO:20,IN:15,SU:0},mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:800,MO:800,IN:500,SU:500}},
       iso_ite:{label:'Isolation extérieure (ITE)',sub:'Parcours Ampleur uniquement en 2026',prixBase:null,prixM2:190,eco:0.30,anah:true,multi:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:3000,MO:3000,IN:2000,SU:2000}},
       ballon:{label:'Ballon thermodynamique',sub:'3 500 €',prixBase:3500,prixM2:null,eco:0.14,multi:false,mprime:{TM:1200,MO:800,IN:400,SU:0},cee:{TM:700,MO:700,IN:500,SU:500}},
-      vmc_df:{label:'VMC simple et double flux',sub:'Ventilation mécanique contrôlée',prixBase:11900,prixM2:null,eco:0.10,multi:false,mprime:{TM:2500,MO:2000,IN:1500,SU:0},cee:{TM:1000,MO:1000,IN:600,SU:600}},
+      vmc_df:{label:'VMC double flux',sub:'Ventilation mécanique contrôlée',prixBase:11900,prixM2:null,eco:0.10,multi:false,mprime:{TM:2500,MO:2000,IN:1500,SU:0},cee:{TM:1000,MO:1000,IN:600,SU:600}},
       menuiseries:{label:'Remplacement des menuiseries',sub:'Fenêtres / portes-fenêtres (≈ 10 équip.)',prixBase:8000,prixM2:null,eco:0.12,multi:false,mprime:{TM:1000,MO:800,IN:400,SU:0},cee:{TM:300,MO:300,IN:300,SU:300}},
       reno_gl:{label:'Rénovation globale',sub:'PAC 14 + ITE PSE + VMC df',prixBase:null,prixM2:null,eco:0.82,anah:true,multi:true,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:7000,MO:7000,IN:5000,SU:5000}},
       pv_6:{label:'Panneaux solaires 6 kWc',sub:'12 000 €',prixBase:12000,prixM2:null,eco:0.00,multi:false,mprime:{TM:0,MO:0,IN:0,SU:0},cee:{TM:0,MO:0,IN:0,SU:0}}
@@ -594,11 +603,12 @@
   </script>
 
   <footer style="background:#0F5132;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
-    <span style="font-size:13px;color:rgba(245,240,232,.45)">© 2026 Eco Trans'Énergie — Meyzieu &amp; Lyon</span>
+    <span style="font-size:13px;color:rgba(245,240,232,.45)">© 2026 Eco Trans'Énergie — Lyon & Métropole</span>
     <nav style="display:flex;gap:24px;flex-wrap:wrap">
       <a href="index.html" style="font-size:13px;color:rgba(245,240,232,.6);text-decoration:none">Accueil</a>
       <a href="professionnels.html" style="font-size:13px;color:rgba(245,240,232,.6);text-decoration:none">Professionnels &amp; Tertiaire</a>
       <a href="blog.html" style="font-size:13px;color:#C9A86A;text-decoration:none;font-weight:600">Blog</a>
+      <a href="mentions-legales.html" style="font-size:13px;color:rgba(245,240,232,.6);text-decoration:none">Mentions légales</a>
       <a href="professionnels.html#form" style="font-size:13px;color:rgba(245,240,232,.6);text-decoration:none">Contact</a>
     </nav>
   </footer>
